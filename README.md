@@ -39,6 +39,12 @@ You will need [Sass](https://sass-lang.com/) installed. For example, on a Mac wi
 
     brew install sass/sass/sass
 
+You will need [Composer](https://getcomposer.org/) installed if you want to update the version of [Carbon Fields](https://carbonfields.net/) that is included in the theme’s `/vendor` directory. You can [install it manually](https://getcomposer.org/download/), or on a Mac with [Homebrew](https://brew.sh/) you could run:
+
+    brew install composer
+
+You can then run `composer install` from inside the `fixmyblock-theme` directory.
+
 ## Dealing with compiled CSS
 
 The `fixmyblock-theme` directory includes compiled CSS, to make the theme immediately usable as a valid WordPress theme, without having to compile the styles first.
