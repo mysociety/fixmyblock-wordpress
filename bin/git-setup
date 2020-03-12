@@ -1,0 +1,43 @@
+#!/bin/sh
+
+bin_dir=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+
+grep --quiet --fixed-strings --no-messages '[merge "ours"]' "${bin_dir}/../.git/config"
+if [ $? -ne 0 ]; then
+	echo "Adding merge driver to git config"
+	cat <<-'EOF' >> "${bin_dir}/../.git/config"
+	[merge "ours"]
+		name = "Keep ours merge"
+		driver = true
+	EOF
+fi
+
+grep --quiet --fixed-strings --no-messages 'bin/make-css' "${bin_dir}/../.git/hooks/post-rewrite"
+if [ $? -ne 0 ]; then
+	echo "Adding post-rewrite hook"
+	cat <<-'EOF' >> "${bin_dir}/../.git/hooks/post-rewrite"
+	if [[ $1 = "rebase" ]]; then  
+		echo "\nRebuiling compiled files post $1..."
+		bin/make-css
+		echo "Adding built files to the last commit"
+		git add -u
+		git commit --amend --no-edit
+	fi
+	EOF
+	chmod +x "${bin_dir}/../.git/hooks/post-rewrite"
+fi
+
+grep --quiet --fixed-strings --no-messages 'bin/make-css' "${bin_dir}/../.git/hooks/pre-commit"
+if [ $? -ne 0 ]; then
+	echo "Adding pre-commit hook"
+	cat <<-'EOF' >> "${bin_dir}/../.git/hooks/pre-commit"
+	sources=`git status -s | grep '^M.*assets\/sass'`
+	built=`git status -s | grep 'assets\/css'`
+	if [ -n "$sources" ] &&  [ -z "$built" ]; then  
+		echo "*** WARNING ***"
+		echo "The Sass files have been modified, but the CSS files have not."
+		echo "Did you forget to run bin/make-css or commit the result?"
+	fi
+	EOF
+	chmod +x "${bin_dir}/../.git/hooks/pre-commit"
+fi

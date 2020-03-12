@@ -1,0 +1,4 @@
+.vagrant
+/.vagrant.yml
+.sass-cache
+/*.log

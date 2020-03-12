@@ -1,0 +1,14 @@
+#!/bin/bash
+
+bin_dir=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+mode="--update"
+force=""
+
+for argument in "$@"
+do
+    [[ "$argument" == "--watch" ]] && mode="--watch"
+    [[ "$argument" == "--force" ]] && force="--force"
+done
+
+cd "${bin_dir}/../fixmyblock-theme/assets"
+sass $mode $force --style compressed sass/main.scss:css/main.css
