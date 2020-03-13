@@ -27,6 +27,13 @@ The VM will automatically install WordPress, phpMyAdmin and MailHog, which you c
 
 WordPress and MySQL usernames and passwords are defined at the top of `provision/provision.sh`.
 
+There’s a fixtures script that sets up example menus, pages, etc, in WordPress. You must run it from inside the VM, like so:
+
+    cd /var/www/wordpress
+    /home/vagrant/shared/bin/fixture
+
+## Editing the styles
+
 You can (re)build the CSS stylesheets by running this on the host machine:
 
     bin/make-css
@@ -39,11 +46,13 @@ You will need [Sass](https://sass-lang.com/) installed. For example, on a Mac wi
 
     brew install sass/sass/sass
 
+## Composer packages
+
 You will need [Composer](https://getcomposer.org/) installed if you want to update the version of [Carbon Fields](https://carbonfields.net/) that is included in the theme’s `/vendor` directory. You can [install it manually](https://getcomposer.org/download/), or on a Mac with [Homebrew](https://brew.sh/) you could run:
 
     brew install composer
 
-You can then run `composer install` from inside the `fixmyblock-theme` directory.
+You can then run `composer install` from inside the `fixmyblock-theme` directory, on the host machine.
 
 ## Dealing with compiled CSS
 

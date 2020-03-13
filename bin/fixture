@@ -1,0 +1,7 @@
+#!/bin/sh
+
+wp menu create "Main menu"
+wp menu item add-custom "Main menu" "Guides" "/guides/"
+wp menu item add-custom "Main menu" "Case studies" "/case-studies/"
+
+wp menu location assign "Main menu" "header"
