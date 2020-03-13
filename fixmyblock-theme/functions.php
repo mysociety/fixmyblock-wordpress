@@ -10,3 +10,5 @@ require get_parent_theme_file_path( '/inc/wp-enqueue.php' );
 require get_parent_theme_file_path( '/inc/carbon-fields.php' );
 
 require get_parent_theme_file_path( '/post-types/guide.php' );
+
+require get_parent_theme_file_path( '/blocks/related-items.php' );
