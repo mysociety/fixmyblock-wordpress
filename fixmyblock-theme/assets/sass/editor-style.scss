@@ -1,0 +1,72 @@
+@import "variables";
+
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+// TODO: How do we apply { background-color: $body-bg; } to the
+// .editor-styles-wrapper given that WordPress takes the contents of
+// this stylesheet and adds ".editor-styles-wrapper " to the start of
+// each selector anyway? Maybe it could go in admin-style.scss?
+
+.cf-block__preview,
+.editor-rich-text {
+    font-family: $font-family-base;
+    @include font-size($font-size-base);
+    font-weight: $font-weight-base;
+    line-height: $line-height-base;
+    color: $body-color;
+
+    a {
+        color: $link-color;
+        text-decoration: $link-decoration;
+
+        @include hover() {
+            color: $link-hover-color;
+            text-decoration: $link-hover-decoration;
+        }
+    }
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: $paragraph-margin-bottom;
+}
+
+.editor-post-title__input {
+    font-family: ($headings-font-family or $font-family-base);
+    font-weight: $headings-font-weight;
+    line-height: $headings-line-height;
+    color: $headings-color;
+    @include font-size($h1-font-size);
+}
+
+.wp-block-separator.is-style-wide {
+    margin-top: $hr-margin-y;
+    margin-bottom: $hr-margin-y;
+    border: 0;
+    border-top: $hr-border-width solid $hr-border-color;
+}
+
+.wp-block-quote {
+    border: none;
+    margin: 0;
+    padding: 0;
+
+    margin-bottom: $spacer;
+
+    .editor-rich-text {
+        @include font-size($blockquote-font-size);
+    }
+}
+
+.wp-block-quote__citation {
+    margin-top: 0;
+
+    @include font-size($blockquote-small-font-size);
+    color: $blockquote-small-color;
+
+    &:before {
+        content: "\2014\00A0"; // em dash, nbsp
+    }
+}

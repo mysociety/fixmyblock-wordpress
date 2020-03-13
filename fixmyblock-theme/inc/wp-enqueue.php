@@ -19,3 +19,10 @@ function enqueue_admin_stylesheet() {
     );
 }
 add_action( 'admin_enqueue_scripts', 'enqueue_admin_stylesheet' );
+
+function enqueue_editor_stylesheet() {
+    add_editor_style(
+        '/assets/css/editor-style.css'
+    );
+}
+add_action( 'admin_init', 'enqueue_editor_stylesheet' );

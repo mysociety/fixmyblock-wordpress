@@ -30,5 +30,9 @@ add_theme_support( 'post-thumbnails' );
 add_theme_support( 'customize-selective-refresh-widgets' );
 
 
-// Hilariously not mentioned anywhere in the developer docs, but good to add for Block Editor support.
+// https://developer.wordpress.org/block-editor/developers/themes/theme-support/#wide-alignment
 add_theme_support( 'align-wide' );
+
+
+// https://developer.wordpress.org/block-editor/developers/themes/theme-support/#editor-styles
+add_theme_support('editor-styles');
