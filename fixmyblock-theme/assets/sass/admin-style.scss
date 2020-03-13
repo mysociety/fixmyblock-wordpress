@@ -1,0 +1,4 @@
+// Prevent grey background on "Relational" field buttons.
+.cf-association__option-action {
+    background: transparent;
+}

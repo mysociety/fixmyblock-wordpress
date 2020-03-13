@@ -11,4 +11,4 @@ do
 done
 
 cd "${bin_dir}/../fixmyblock-theme/assets"
-sass $mode $force --style compressed sass/main.scss:css/main.css
+sass $mode $force --style compressed sass/main.scss:css/main.css sass/admin-style.scss:css/admin-style.css

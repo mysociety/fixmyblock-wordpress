@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACA,8BAA+B,CAC3B,UAAU,CAAE,WAAW",
+"sources": ["../sass/admin-style.scss"],
+"names": [],
+"file": "admin-style.css"
+}
