@@ -33,6 +33,11 @@ p {
     margin-bottom: $paragraph-margin-bottom;
 }
 
+p.lead {
+    @include font-size($lead-font-size);
+    font-weight: $lead-font-weight;
+}
+
 .editor-post-title__input {
     font-family: ($headings-font-family or $font-family-base);
     font-weight: $headings-font-weight;
