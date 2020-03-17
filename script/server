@@ -1,0 +1,59 @@
+#!/bin/bash
+#
+# server - launch application
+#
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+# Get environment variables, if they exist.
+ENV_FILE=${ENV_FILE:-../env.sh}
+if [ -f "$ENV_FILE" ]; then
+  echo "==> Loading environment from ${ENV_FILE}"
+  source $ENV_FILE
+fi
+
+script/bootstrap
+
+STACK=${STACK:-fixmyblock}
+
+# Argument handling.
+# The default action when called without an argument is "start"
+ACTION=$1
+[ -n "$ACTION" ] || ACTION="start"
+
+# Check for Swarm mode.
+SWARM=$(docker info 2>/dev/null | grep '^ Swarm' | awk '{ print $NF }')
+echo "==> Swarm mode is ${SWARM}"
+if [ "$SWARM" = "active" ] ; then
+  case $ACTION in
+    start | --start)
+      echo "==> Deploying Swarm stack ${STACK}..."
+      docker stack deploy -c ${PWD}/docker-compose.yml ${STACK}
+      ;;
+    stop | --stop)
+      echo "==> Stopping Swarm stack ${STACK}..."
+      docker stack rm ${STACK}
+      ;;
+    reload | --reload)
+      echo "==> Reloading Swarm service ${STACK}_fixmyblock..."
+      docker service update --force ${STACK}_fixmyblock
+      ;;
+    restart | --restart)
+      echo "==> Full restart of Swarm stack ${STACK}..."
+      docker stack rm ${STACK}
+      docker stack deploy -c ${PWD}/docker-compose.yml ${STACK}
+      ;;
+    status | --status)
+      echo "==> Checking status of stack ${STACK}..."
+      docker stack ps ${STACK}
+      ;;
+    *)
+      echo '==> Usage: script/server {start|stop|reload|restart|status}'
+      exit 1
+      ;;
+  esac
+else
+  echo "==> Docker Compose not implemented yet."
+fi

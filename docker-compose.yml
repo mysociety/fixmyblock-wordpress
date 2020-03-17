@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+
+  nginx:
+    image: sagepe/nginx:0.0.1
+    volumes:
+        - ./conf/nginx.conf:/etc/nginx/sites-available/default:ro
+        - ./web:/var/www/html:ro
+        - ${HTPASSWD}:/etc/nginx/htpasswd
+    ports:
+      - "127.0.0.1:8170:80"
+
+  fixmyblock:
+    image: wordpress
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: fixmyblock
+      WORDPRESS_DB_PASSWORD: password
+      WORDPRESS_DB_NAME: fixmyblock
+    volumes:
+      - wordpress:/var/www/html
+      - ./fixmyblock-theme:/var/www/html/wp-content/themes/fixmyblock-theme
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: fixmyblock
+      MYSQL_USER: fixmyblock
+      MYSQL_PASSWORD: password
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:
+
