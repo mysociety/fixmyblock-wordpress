@@ -49,7 +49,7 @@ function guide_init() {
 	) );
 
 }
-add_action( 'init', 'guide_init' );
+add_action( 'after_setup_theme', 'guide_init' );
 
 /**
  * Sets the post updated messages for the `guide` post type.
