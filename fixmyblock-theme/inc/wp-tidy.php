@@ -24,3 +24,7 @@ add_action( 'init', 'disable_emojis' );
 remove_filter( 'the_content', 'wpautop' );
 add_filter( 'the_content', 'wpautop' , 99 );
 add_filter( 'the_content', 'shortcode_unautop', 100 );
+
+
+// Enable custom excerpt text box for Pages.
+add_post_type_support( 'page', 'excerpt' );

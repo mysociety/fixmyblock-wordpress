@@ -37,7 +37,7 @@ function guide_init() {
 		'taxonomies'            => array( 'category', 'post_tag' ),
 		'show_ui'               => true,
 		'show_in_nav_menus'     => true,
-		'supports'              => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'page-attributes', 'revisions' ),
+		'supports'              => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'custom-fields', 'page-attributes', 'revisions' ),
 		'has_archive'           => true,
 		'rewrite'               => array( 'slug' => 'guide' ),
 		'query_var'             => true,

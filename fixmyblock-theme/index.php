@@ -6,6 +6,6 @@
 
 get_header();
 
-include get_parent_theme_file_path( '/inc/post-list.php' );
+include get_parent_theme_file_path( '/templates/post-list.php' );
 
 get_footer();

@@ -119,17 +119,8 @@ function render_post_list_block( $fields, $attributes, $inner_blocks ) {
             esc_attr( $className )
         );
 
-        echo '<ul>' . "\n";
+        echo post_list( $results, array( 'show_excerpt' => true ) );
 
-        foreach( $results as $result ) {
-            echo sprintf(
-                '<li><a href="%s">%s</a></li>' . "\n",
-                esc_url( get_permalink($result) ),
-                esc_html( get_the_title($result) )
-            );
-        }
-
-        echo '</ul>' . "\n";
         echo '</div>' . "\n";
     }
 }

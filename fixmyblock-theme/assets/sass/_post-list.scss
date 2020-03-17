@@ -1,0 +1,22 @@
+.post-list {
+
+}
+
+.post-list__item {
+    margin: ( $spacer * 2 ) 0;
+    max-width: 40em;
+
+    & > :last-child {
+        margin-bottom: 0;
+    }
+}
+
+.post-list__item__title {
+    margin-bottom: ( $spacer / 2 );
+}
+
+.post-list__item__date {
+    display: block;
+    margin-bottom: ( $spacer / 2 );
+    color: $text-muted;
+}
