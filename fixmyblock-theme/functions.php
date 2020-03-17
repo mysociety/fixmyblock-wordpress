@@ -14,3 +14,4 @@ require get_parent_theme_file_path( '/inc/menus.php' );
 require get_parent_theme_file_path( '/post-types/guide.php' );
 
 require get_parent_theme_file_path( '/blocks/related-items.php' );
+require get_parent_theme_file_path( '/blocks/post-list.php' );

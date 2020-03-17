@@ -75,3 +75,23 @@ p.lead {
         content: "\2014\00A0"; // em dash, nbsp
     }
 }
+
+.wp-block {
+    .cf-block__fields {
+        margin: 0;
+        padding: 7px 0;
+        background: rgba(139, 139, 150, .1); // match .wp-block-shortcode
+    }
+
+    .cf-field {
+        padding: 7px 14px;
+
+        .cf-select__input {
+            max-width: none;
+        }
+    }
+
+    .cf-radio__list {
+        margin-bottom: 0;
+    }
+}
