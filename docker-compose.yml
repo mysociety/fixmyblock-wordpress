@@ -19,6 +19,12 @@ services:
       WORDPRESS_DB_USER: fixmyblock
       WORDPRESS_DB_PASSWORD: password
       WORDPRESS_DB_NAME: fixmyblock
+      WORDPRESS_SMTP_HOST: ${WORDPRESS_SMTP_HOST}
+      WORDPRESS_SMTP_PORT: ${WORDPRESS_SMTP_PORT}
+      WORDPRESS_SMTP_USERNAME: ${WORDPRESS_SMTP_USERNAME}
+      WORDPRESS_SMTP_PASSWORD: ${WORDPRESS_SMTP_PASSWORD}
+      WORDPRESS_SMTP_FROM: ${WORDPRESS_SMTP_FROM}
+      WORDPRESS_SMTP_FROM_NAME: ${WORDPRESS_SMTP_FROM_NAME}
     volumes:
       - wordpress:/var/www/html
       - ./fixmyblock-theme:/var/www/html/wp-content/themes/fixmyblock-theme
