@@ -36,6 +36,13 @@ if ( have_posts() ) {
             <div class="col-md-8">
                 <?php the_content(); ?>
             </div>
+            <div class="col-md-4">
+              <?php if ( is_active_sidebar( 'generic-sidebar' ) ) { ?>
+                <aside class="blog-sidebar">
+                    <?php dynamic_sidebar( 'generic-sidebar' ); ?>
+                </aside>
+              <?php } ?>
+            </div>
         </div>
 
     </div>
