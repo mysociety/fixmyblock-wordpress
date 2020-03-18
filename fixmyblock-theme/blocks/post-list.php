@@ -58,7 +58,7 @@ function define_post_list_block() {
 }
 
 function render_post_list_block( $fields, $attributes, $inner_blocks ) {
-    $className = 'fmb-post-list';
+    $className = 'post-list';
     if ( isset($attributes['className']) ) {
         $className = $className . ' ' . $attributes['className'];
     }

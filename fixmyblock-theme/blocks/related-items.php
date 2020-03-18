@@ -34,7 +34,7 @@ function define_related_items_block() {
 }
 
 function render_related_items_block( $fields, $attributes, $inner_blocks ) {
-    $className = 'fmb-related-items';
+    $className = 'related-items';
     if ( isset($attributes['className']) ) {
         $className = $className . ' ' . $attributes['className'];
     }
@@ -50,20 +50,16 @@ function render_related_items_block( $fields, $attributes, $inner_blocks ) {
         );
     }
 
-    echo '<ul>';
+    echo '<div class="post-list">' . "\n";
 
     foreach ( $fields['related_items'] as $r ) {
         if ( $r['type'] == 'post' ) {
             $p = get_post( $r['id'] );
-            echo sprintf(
-                '<li><a href="%s">%s</a></li>' . "\n",
-                get_permalink($p),
-                get_the_title($p)
-            );
+            echo post_list_item( $p, array( 'heading_tag' => 'h3' ) );
         }
     }
 
-    echo '</ul>' . "\n";
+    echo '</div>' . "\n";
     echo '</div>' . "\n";
 }
 
