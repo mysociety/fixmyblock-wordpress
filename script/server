@@ -46,6 +46,7 @@ if [ "$SWARM" = "active" ] ; then
     restart | --restart)
       echo "==> Full restart of Swarm stack ${STACK}..."
       docker stack rm ${STACK}
+      sleep 2
       docker stack deploy -c ${PWD}/docker-compose.yml ${STACK}
       ;;
     status | --status)
