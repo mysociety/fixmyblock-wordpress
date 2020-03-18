@@ -16,6 +16,9 @@ fi
 
 script/bootstrap
 
+echo "==> Pulling necessary docker images..."
+docker-compose pull
+
 STACK=${STACK:-fixmyblock}
 
 # Argument handling.
