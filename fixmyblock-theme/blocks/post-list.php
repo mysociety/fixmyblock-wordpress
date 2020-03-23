@@ -12,6 +12,11 @@ function define_post_list_block() {
         $filtering_options[ 'post_type:' . $post_type->name ] = 'Post type: '. $post_type->label;
     }
 
+    $categories = get_categories( array( 'hide_empty' => false ) );
+    foreach ( $categories as $category ) {
+        $filtering_options[ 'category:' . $category->term_id ] = 'Category: ' . $category->name;
+    }
+
     $tags = get_tags();
     foreach ( $tags as $tag ) {
         $filtering_options[ 'post_tag:' . $tag->term_id ] = 'Tag: ' . $tag->name;
@@ -71,10 +76,10 @@ function render_post_list_block( $fields, $attributes, $inner_blocks ) {
     $filters = array(
         'post_type' => array(),
         'post_tag' => array(),
+        'category' => array(),
     );
 
-    # Split the array of post_type and/or post_tag filters into two arrays,
-    # one for post_types and one for tags.
+    # Split the array of post_type/post_tag/category filters into three separate arrays.
     if ( $fields['filtering'] ) {
         foreach ( $fields['filtering'] as $v ) {
             $filter = explode( ':', $v );
@@ -84,6 +89,10 @@ function render_post_list_block( $fields, $attributes, $inner_blocks ) {
 
     if ( $filters['post_type'] ) {
         $query_params['post_type'] = $filters['post_type'];
+    }
+
+    if ( $filters['category'] ) {
+        $query_params['category'] = $filters['category'];
     }
 
     if ( $filters['post_tag'] ) {

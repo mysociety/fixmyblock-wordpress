@@ -26,5 +26,10 @@ add_filter( 'the_content', 'wpautop' , 99 );
 add_filter( 'the_content', 'shortcode_unautop', 100 );
 
 
-// Enable custom excerpt text box for Pages.
-add_post_type_support( 'page', 'excerpt' );
+// Enable tags, categories, and custom excerpt text box for Pages.
+function enable_full_meta_for_pages() {
+    add_post_type_support( 'page', 'excerpt' );
+    register_taxonomy_for_object_type( 'post_tag', 'page' );
+    register_taxonomy_for_object_type( 'category', 'page' );
+}
+add_action( 'init', 'enable_full_meta_for_pages' );

@@ -26,7 +26,6 @@ function define_related_items_block() {
                 array(
                     array( 'type' => 'post', 'post_type' => 'post' ),
                     array( 'type' => 'post', 'post_type' => 'page' ),
-                    array( 'type' => 'post', 'post_type' => 'guide' ),
                 )
             ),
         )

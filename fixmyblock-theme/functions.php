@@ -14,7 +14,5 @@ require get_parent_theme_file_path( '/inc/widgets.php' );
 require get_parent_theme_file_path( '/inc/navbar-brand.php' );
 require get_parent_theme_file_path( '/inc/post-list.php' );
 
-require get_parent_theme_file_path( '/post-types/guide.php' );
-
 require get_parent_theme_file_path( '/blocks/related-items.php' );
 require get_parent_theme_file_path( '/blocks/post-list.php' );
