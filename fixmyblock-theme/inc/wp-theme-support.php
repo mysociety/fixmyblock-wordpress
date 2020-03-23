@@ -36,3 +36,7 @@ add_theme_support( 'align-wide' );
 
 // https://developer.wordpress.org/block-editor/developers/themes/theme-support/#editor-styles
 add_theme_support('editor-styles');
+
+
+// https://developer.wordpress.org/themes/functionality/custom-logo/
+add_theme_support( 'custom-logo' );

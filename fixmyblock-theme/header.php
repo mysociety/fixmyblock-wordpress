@@ -15,9 +15,7 @@
     <header class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
 
-            <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-                <?php bloginfo( 'name' ); ?>
-            </a>
+            <?php echo get_navbar_brand(); ?>
 
           <?php if ( has_nav_menu( 'header' ) ) { ?>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
