@@ -8,11 +8,15 @@ get_header();
 
 ?>
 
-<h1>Ooops! We can’t find that page</h1>
+<div class="container">
+    <div class="py-3 py-sm-4 py-md-5">
 
-<p>Maybe try a search?</p>
+        <h1>Ooops! We can’t find that page</h1>
+        <p>Maybe try a search?</p>
+        <?php get_search_form(); ?>
 
-<?php get_search_form(); ?>
+    </div>
+</div>
 
 <?php
 

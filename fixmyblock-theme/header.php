@@ -39,4 +39,3 @@
     </header>
 
     <div class="site-content">
-        <div class="container">
