@@ -1,6 +1,82 @@
+.navbar {
+    background-color: $color-fmb-pale-yellow;
+}
+
+.navbar-toggler {
+    padding: 0.75rem;
+}
+
 .navbar-brand {
     img {
         max-height: 60px;
         width: auto;
+    }
+}
+
+.navbar-nav {
+    .nav-link {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 500;
+
+        @include media-breakpoint-up(md) {
+            font-size: 1.2rem;
+        }
+
+        @include media-breakpoint-up(xl) {
+            font-size: 1.3rem;
+        }
+    }
+
+    .dropdown-toggle {
+        &:after {
+            vertical-align: 0.15em;
+        }
+    }
+
+    .dropdown-menu {
+        left: auto;
+        right: 0;
+        box-shadow: $box-shadow-lg;
+    }
+}
+
+// More finger-friendly mobile nav bar.
+@include media-breakpoint-down(sm) {
+    .navbar {
+        .nav-link {
+            border-top: 1px solid rgba(#000, 0.2);
+            padding: 0.5rem 0;
+        }
+
+        .dropdown-menu {
+            background: transparent;
+            border: none;
+            padding: 0 0 0.75rem 0;
+            margin: 0;
+            min-width: 0;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .dropdown-item {
+            white-space: normal;
+            padding: 0.25rem 1rem;
+
+            @include hover-focus-active() {
+                color: $navbar-light-color;
+                text-decoration: underline;
+                background: transparent;
+            }
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+
+            &:after {
+                margin-left: auto;
+            }
+        }
     }
 }
