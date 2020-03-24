@@ -15,6 +15,7 @@ if ( have_posts() ) {
         <div class="container">
             <div class="py-3 py-sm-4 py-md-5">
                 <h1><?php the_title(); ?></h1>
+                <?php get_search_form(); ?>
             </div>
         </div>
     </div>
