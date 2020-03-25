@@ -17,3 +17,4 @@ require get_parent_theme_file_path( '/inc/post-list.php' );
 
 require get_parent_theme_file_path( '/blocks/related-items.php' );
 require get_parent_theme_file_path( '/blocks/post-list.php' );
+require get_parent_theme_file_path( '/blocks/big-number.php' );
