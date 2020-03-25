@@ -1,0 +1,85 @@
+.helpful-controls {
+    margin: -0.5rem;
+
+    & > div {
+        margin: 0.5rem;
+        display: inline-block;
+    }
+}
+
+.helpful-headline {
+    @include font-size($h4-font-size);
+}
+
+.helpful-button {
+    display: block;
+    font-family: $btn-font-family;
+    font-weight: $btn-font-weight;
+    color: $body-color;
+    text-align: center;
+    white-space: $btn-white-space;
+    vertical-align: middle;
+    cursor: if($enable-pointer-cursor-for-buttons, pointer, null);
+    user-select: none;
+    background-color: transparent;
+    border: $btn-border-width solid transparent;
+    @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $btn-line-height, $btn-border-radius);
+    @include transition($btn-transition);
+
+    background-repeat: no-repeat;
+    background-position: $btn-padding-x 50%;
+    background-size: 16px 16px;
+    padding-left: ( $btn-padding-x + 1rem + 0.5rem );
+  
+    @include hover() {
+        color: $body-color;
+        text-decoration: none;
+    }
+  
+    &:focus,
+    &.focus {
+        outline: 0;
+        box-shadow: $btn-focus-box-shadow;
+    }
+  
+    &:active,
+    &.active {
+        @include box-shadow($btn-active-box-shadow);
+  
+        &:focus {
+            @include box-shadow($btn-focus-box-shadow, $btn-active-box-shadow);
+        }
+    }
+}
+
+.helpful-pro {
+    @include svg-background-image('tick');
+    color: $success;
+    border-color: $success;
+
+    @include hover-focus() {
+        color: darken($success, 10%);
+        border-color: darken($success, 10%);
+        background-color: mix($success, #fff, 10%);
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 $btn-focus-width rgba($success, .5);
+    }
+}
+
+.helpful-contra {
+    @include svg-background-image('cross');
+    color: $danger;
+    border-color: $danger;
+
+    @include hover-focus() {
+        color: darken($danger, 10%);
+        border-color: darken($danger, 10%);
+        background-color: mix($danger, #fff, 10%);
+    }
+
+    &:focus {
+        box-shadow: 0 0 0 $btn-focus-width rgba($danger, .5);
+    }
+}

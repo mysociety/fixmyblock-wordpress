@@ -1,0 +1,21 @@
+.sidebar {
+    margin: -2rem 0;
+    color: $gray-600;
+
+    @include media-breakpoint-up(lg) {
+        margin: -3rem 0;
+    }
+
+    .sidebar-widget {
+        margin: 2rem 0;
+
+        @include media-breakpoint-up(lg) {
+            margin: 3rem 0;
+        }
+    }
+
+    .sidebar-widget__title,
+    .helpful-headline {
+        @include font-size($h4-font-size);
+    }
+}
