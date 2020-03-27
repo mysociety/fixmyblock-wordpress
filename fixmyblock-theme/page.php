@@ -32,6 +32,8 @@ if ( have_posts() ) {
         </div>
       <?php } ?>
 
+      <?php the_table_of_contents(); ?>
+
       <?php if ( has_post_thumbnail() ) { ?>
         <p>
             <a href="<?php echo esc_url( get_permalink() ); ?>">
