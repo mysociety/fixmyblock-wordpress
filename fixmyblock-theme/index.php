@@ -6,21 +6,20 @@
 
 get_header(); ?>
 
+<?php if ( is_search() ) { ?>
+    <div class="search-header">
+        <div class="container">
+            <div class="py-3 pb-sm-4 pt-md-4 pb-md-5">
+                <?php get_search_form(); ?>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+
 <div class="container">
     <div class="py-3 py-sm-4 py-md-5">
 
-      <?php if ( is_search() ) { global $wp_query; ?>
-
-        <div class="row mb-3 mb-md-5">
-            <div class="col-md-7">
-                <h1><?php echo get_search_query(); ?></h1>
-              <?php if ( ! $wp_query->found_posts ) { ?>
-                <p>We could not find any results for your search.</p>
-              <?php } ?>
-            </div>
-        </div>
-
-      <?php } elseif ( is_archive() ) { ?>
+      <?php if ( is_archive() ) { ?>
 
         <div class="row mb-3 mb-md-5">
             <div class="col-md-7">
@@ -35,6 +34,11 @@ get_header(); ?>
 
         <div class="row">
             <div class="col-md-7">
+              <?php if ( is_search() ) { global $wp_query; ?>
+                <?php if ( ! $wp_query->found_posts ) { ?>
+                  <p>We could not find any results for your search.</p>
+                <?php } ?>
+              <?php } ?>
                 <?php include get_parent_theme_file_path( '/templates/post-list.php' ); ?>
             </div>
             <div class="col-md-4 offset-md-1 col-xl-3 offset-xl-2">

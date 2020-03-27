@@ -13,7 +13,7 @@ if ( have_posts() ) {
 <?php if ( is_front_page() ) { ?>
     <div class="home-header">
         <div class="container">
-            <div class="py-3 py-sm-4 py-md-5">
+            <div class="py-3 pb-sm-4 pt-md-4 pb-md-5">
                 <h1><?php the_title(); ?></h1>
                 <?php get_search_form(); ?>
             </div>
