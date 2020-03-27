@@ -1,0 +1,28 @@
+.pagination {
+    .nav-links {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .page-numbers {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border-radius: $border-radius;
+    }
+
+    a.page-numbers {
+        @include hover() {
+            background-color: $gray-200;
+        }
+
+        &:focus {
+            outline: 0;
+            box-shadow: $btn-focus-box-shadow;
+        }
+    }
+
+    .current {
+        color: $color-fmb-grey;
+    }
+}

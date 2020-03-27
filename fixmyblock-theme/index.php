@@ -39,7 +39,8 @@ get_header(); ?>
                   <p>We could not find any results for your search.</p>
                 <?php } ?>
               <?php } ?>
-                <?php include get_parent_theme_file_path( '/templates/post-list.php' ); ?>
+                <?php get_template_part( 'templates/post-list' ); ?>
+                <?php the_posts_pagination(); ?>
             </div>
             <div class="col-md-4 offset-md-1 col-xl-3 offset-xl-2">
               <?php if ( is_active_sidebar( get_sidebar_id_for_page() ) ) { ?>
