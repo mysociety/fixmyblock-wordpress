@@ -33,6 +33,12 @@ function register_widgets() {
     ), $defaults ) );
 
     register_sidebar( wp_parse_args( array(
+        'name' => 'Search page sidebar',
+        'id' => 'search-sidebar',
+        'description' => 'Shown on the search results page.',
+    ), $defaults ) );
+
+    register_sidebar( wp_parse_args( array(
         'name' => 'Generic sidebar',
         'id' => 'generic-sidebar',
         'description' => 'Shown when no other, more specific, sidebar is suitable.',
@@ -50,6 +56,8 @@ function get_sidebar_id_for_page() {
         return 'post-sidebar';
     } elseif ( is_page() ) {
         return 'page-sidebar';
+    } elseif ( is_search() ) {
+        return 'search-sidebar';
     } else {
         return 'generic-sidebar';
     }
