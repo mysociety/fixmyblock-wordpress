@@ -97,6 +97,7 @@ a img.alignleft {
 }
 
 .wp-block-quote {
+    border-left-color: $border-color;
     @extend .blockquote;
 }
 
@@ -104,7 +105,9 @@ a img.alignleft {
     @extend .blockquote-footer;
 }
 
-.wp-block-separator.is-style-default {
-    max-width: 100px;
-    border-top-width: 2px;
+.wp-block-separator.is-style-wide {
+    margin-top: $hr-margin-y;
+    margin-bottom: $hr-margin-y;
+    border: 0;
+    border-top: $hr-border-width solid $hr-border-color;
 }

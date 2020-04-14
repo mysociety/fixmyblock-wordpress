@@ -55,9 +55,8 @@ p.lead {
 }
 
 .wp-block-quote {
-    border: none;
+    border-left-color: $border-color;
     margin: 0;
-    padding: 0;
 
     margin-bottom: $spacer;
 

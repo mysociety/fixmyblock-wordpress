@@ -38,5 +38,13 @@ add_theme_support( 'align-wide' );
 add_theme_support('editor-styles');
 
 
+https://developer.wordpress.org/block-editor/developers/themes/theme-support/#default-block-styles
+add_theme_support( 'wp-block-styles' );
+
+
+// https://developer.wordpress.org/block-editor/developers/themes/theme-support/#responsive-embedded-content
+add_theme_support( 'responsive-embeds' );
+
+
 // https://developer.wordpress.org/themes/functionality/custom-logo/
 add_theme_support( 'custom-logo' );
