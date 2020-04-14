@@ -2,3 +2,23 @@
 .cf-association__option-action {
     background: transparent;
 }
+
+// Default value (160px) is an exact multiple of the
+// 40px high .cf-association__option items, which
+// makes the list look like it doesn't scroll.
+// So make sure only part of the last item is visible.
+.cf-association__col {
+    max-height: 175px;
+}
+
+// More intuitive for options to disappear from the first
+// list, when they appear in the second one. Makes it
+// clearer that they've moved from one to the other.
+.cf-association__option--selected {
+    display: none !important;
+}
+
+// Make CF labels match the default admin labels.
+.cf-container .cf-field__label {
+    font-weight: inherit !important;
+}
