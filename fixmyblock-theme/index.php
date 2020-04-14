@@ -25,7 +25,7 @@ get_header(); ?>
             <div class="col-md-7">
                 <h1><?php echo get_the_archive_title(); ?></h1>
               <?php if ( get_the_archive_description() ) { ?>
-              echo '<p><?php echo get_the_archive_description(); ?></p>
+                <p><?php echo get_the_archive_description(); ?></p>
               <?php } ?>
             </div>
         </div>
