@@ -35,11 +35,7 @@ if ( have_posts() ) {
                 <?php the_content(); ?>
             </div>
             <div class="col-md-4 ofset-md-1 col-xl-3 offset-xl-2">
-              <?php if ( is_active_sidebar( get_sidebar_id_for_page() ) ) { ?>
-                <aside class="sidebar sidebar--post">
-                    <?php dynamic_sidebar( get_sidebar_id_for_page() ); ?>
-                </aside>
-              <?php } ?>
+                <?php the_sidebar(); ?>
             </div>
         </div>
 

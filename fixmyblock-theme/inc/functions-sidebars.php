@@ -15,3 +15,12 @@ function get_sidebar_id_for_page() {
         return 'generic-sidebar';
     }
 }
+
+
+function the_sidebar() {
+    if ( is_active_sidebar( get_sidebar_id_for_page() ) ) {
+        echo '<aside class="sidebar">' . "\n";
+        dynamic_sidebar( get_sidebar_id_for_page() );
+        echo '</aside>' . "\n";
+    }
+}
