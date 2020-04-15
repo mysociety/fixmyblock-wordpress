@@ -1,13 +1,5 @@
 <?php
 
-// Shim for wp_body_open in WordPress <5.2.
-if ( ! function_exists( 'wp_body_open' ) ) {
-    function wp_body_open() {
-        do_action( 'wp_body_open' );
-    }
-}
-
-
 // Helper functions for dealing with "show on front:" options.
 // Literally cannot believe Wordpress doesn’t include these functions.
 function get_posts_page_url() {
@@ -15,6 +7,15 @@ function get_posts_page_url() {
         return get_permalink( get_option('page_for_posts') );
     } else {
         return home_url();
+    }
+}
+
+function get_posts_page_path() {
+    if( 'page' == get_option('show_on_front', false) ) {
+        $p = get_post(get_option('page_for_posts'));
+        return '/' . $p->post_name;
+    } else {
+        return '/';
     }
 }
 
