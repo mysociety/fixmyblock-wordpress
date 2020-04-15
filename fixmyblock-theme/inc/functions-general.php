@@ -29,6 +29,39 @@ function get_posts_page_title() {
 }
 
 
+function the_page_title_and_description() {
+    // The title as displayed at the start of the page <title>.
+    // Use slashes as the separator, so that dates look sensible.
+    $title = wp_title( '/', false );
+
+    // Strip whitespace, then remove the leading slash, then
+    // strip whitespace again.
+    $title = trim( $title );
+    if ( substr($title, 0, 1) == '/' ) {
+        $title = substr( $title, 1 );
+    }
+    $title = trim( $title );
+
+    // Tags and categories might be all lowercase, but that looks silly
+    // in a page heading. So uppercase the first letter.
+    $title = ucfirst( $title );
+
+    echo sprintf(
+        '<h1>%s</h1>',
+        $title
+    );
+
+    $description = get_the_archive_description();
+
+    if ( $description ) {
+        echo sprintf(
+            '<p>%s</p>',
+            $description
+        );
+    }
+}
+
+
 // Record the current template name when including a template.
 // (Handy for debugging which templates are being rendered!)
 function record_current_template( $template ) {

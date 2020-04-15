@@ -23,10 +23,7 @@ get_header(); ?>
 
         <div class="row mb-3 mb-md-5">
             <div class="col-md-7">
-                <h1><?php echo get_the_archive_title(); ?></h1>
-              <?php if ( get_the_archive_description() ) { ?>
-                <p><?php echo get_the_archive_description(); ?></p>
-              <?php } ?>
+                <?php the_page_title_and_description(); ?>
             </div>
         </div>
 
