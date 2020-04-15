@@ -25,11 +25,10 @@ if ( have_posts() ) {
         <div class="page-section">
             <div class="page-section__primary">
                 <h1><?php the_title(); ?></h1>
+                <?php the_table_of_contents(); ?>
             </div>
         </div>
       <?php } ?>
-
-      <?php the_table_of_contents(); ?>
 
       <?php the_feature_section(); ?>
 

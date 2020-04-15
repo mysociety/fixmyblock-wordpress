@@ -42,7 +42,7 @@ function the_table_of_contents( $post = 0 ) {
         }
 
         if ( $headings ) {
-            echo '<div class="table-of-contents my-3 my-md-4 my-lg-5">' . "\n";
+            echo '<div class="table-of-contents">' . "\n";
             echo '<h2>Contents</h2>' . "\n";
             echo '<ol>' . "\n";
             foreach ( $headings as $heading ) {

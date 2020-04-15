@@ -1,6 +1,17 @@
 .table-of-contents {
+    margin-top: ($spacer * 1.5);
+
+    @include media-breakpoint-up('lg') {
+        margin-top: ($spacer * 3);
+        margin-bottom: ($spacer * 1.5) !important;
+    }
+
     h2 {
         font-size: 1em;
         margin-bottom: 0.5rem;
+    }
+
+    ol {
+        margin-bottom: 0;
     }
 }
