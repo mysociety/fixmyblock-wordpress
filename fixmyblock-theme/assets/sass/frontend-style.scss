@@ -41,7 +41,16 @@
 
 @import "wordpress";
 
+// Things common to all pages
 @import "type";
+@import "site-header";
+@import "site-content";
+@import "site-footer";
+@import "page-header";
+@import "page-section";
+@import "sidebar";
+
+// Reusable components
 @import "post-list";
 @import "big-number";
 @import "related-items";
@@ -49,7 +58,7 @@
 @import "search-form";
 @import "pagination";
 @import "table-of-contents";
-@import "site-header";
-@import "site-footer";
-@import "sidebar";
+@import "feature-image";
+
+// Styles for specific pages
 @import "home";

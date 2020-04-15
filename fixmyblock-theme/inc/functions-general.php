@@ -29,6 +29,17 @@ function get_posts_page_title() {
 }
 
 
+function start_site_content() {
+    echo '<div class="site-content">' . "\n";
+    echo '<div class="container">' . "\n";
+}
+
+function end_site_content() {
+    echo '</div>' . "\n";
+    echo '</div>' . "\n";
+}
+
+
 function the_page_title_and_description() {
     // The title as displayed at the start of the page <title>.
     // Use slashes as the separator, so that dates look sensible.
@@ -59,6 +70,23 @@ function the_page_title_and_description() {
             $description
         );
     }
+}
+
+
+function the_feature_section() {
+    $html = '';
+
+    $feature_html = get_the_post_thumbnail();
+
+    if ( $feature_html ) {
+        $html .= '<div class="page-section page-section--feature">' . "\n";
+        $html .= '<div class="page-section__only">' . "\n";
+        $html .= $feature_html;
+        $html .= '</div>' . "\n";
+        $html .= '</div>' . "\n";
+    }
+
+    echo $html;
 }
 
 

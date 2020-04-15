@@ -6,15 +6,14 @@
 
 get_header();
 
+start_site_content();
+
 if ( have_posts() ) {
     while ( have_posts() ) {
         the_post(); ?>
 
-<div class="container">
-    <div class="py-3 py-sm-4 py-md-5">
-
-        <div class="row mb-3 mb-md-5">
-            <div class="col-md-7">
+        <div class="page-section">
+            <div class="page-section__primary">
                 <h1><?php the_title(); ?></h1>
               <?php if ( get_post_type() == 'post' ) { ?>
                 <time datetime="<?php the_time( 'Y-m-d' ); ?>"><?php the_time('jS F Y'); ?></time>
@@ -22,28 +21,21 @@ if ( have_posts() ) {
             </div>
         </div>
 
-      <?php if ( has_post_thumbnail() ) { ?>
-        <p>
-            <a href="<?php echo esc_url( get_permalink() ); ?>">
-                <?php the_post_thumbnail(); ?>
-            </a>
-        </p>
-      <?php } ?>
+        <?php the_feature_section(); ?>
 
-        <div class="row">
-            <div class="col-md-7">
+        <div class="page-section">
+            <div class="page-section__primary">
                 <?php the_content(); ?>
             </div>
-            <div class="col-md-4 ofset-md-1 col-xl-3 offset-xl-2">
+            <div class="page-section__secondary">
                 <?php the_sidebar(); ?>
             </div>
         </div>
 
-    </div>
-</div>
-
 <?php
     }
 }
+
+end_site_content();
 
 get_footer();

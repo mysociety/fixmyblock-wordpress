@@ -1,0 +1,32 @@
+.page-section {
+    @include make-row();
+}
+
+.page-section__only,
+.page-section__primary,
+.page-section__secondary {
+    @include make-col-ready();
+    margin-bottom: ( $spacer * 2 );
+
+    & > :last-child {
+        margin-bottom: 0;
+    }
+}
+
+.page-section__primary {
+    @include media-breakpoint-up('md') {
+        @include make-col(7);
+    }
+}
+
+.page-section__secondary {
+    @include media-breakpoint-up('md') {
+        @include make-col(4);
+        @include make-col-offset(1);
+    }
+
+    @include media-breakpoint-up('xl') {
+        @include make-col(3);
+        @include make-col-offset(2);
+    }
+}
