@@ -26,6 +26,7 @@ if ( have_posts() ) {
         <div class="page-section">
             <div class="page-section__primary">
                 <?php the_content(); ?>
+                <?php the_media_credits(); ?>
             </div>
             <div class="page-section__secondary">
                 <?php the_sidebar(); ?>

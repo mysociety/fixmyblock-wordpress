@@ -22,3 +22,28 @@
 .cf-container .cf-field__label {
     font-weight: inherit !important;
 }
+
+// When you define custom metadata fields for attachments via the
+// attachment_fields_to_edit filter, they get displayed in a nice
+// table on the "Attachment Details" modal screen. Great!
+// BUT the same table layout is used when "Edit(ing) more details"
+// on the attachment’s dedicated post.php page, which isn’t a good
+// use of space, and doesn’t match the other inputs on that screen.
+// So, we remove the table styling, to make the inputs fit in better.
+#post-body .compat-attachment-fields {
+    display: block;
+
+    tbody, tr, td, th {
+        display: block;
+        width: 100%;
+        text-align: inherit;
+    }
+
+    tr {
+        margin: 1em 0;
+    }
+
+    input {
+        width: 100%;
+    }
+}

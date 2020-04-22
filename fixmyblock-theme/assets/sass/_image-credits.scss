@@ -1,0 +1,18 @@
+.image-credits {
+    margin-top: 3rem;
+    color: $gray-600;
+
+    h2 {
+        font-size: 1em;
+        margin-bottom: 0.5rem;
+    }
+
+    ul {
+        @include list-unstyled();
+        margin-bottom: 0;
+    }
+
+    li {
+        margin-bottom: 0.25rem;
+    }
+}

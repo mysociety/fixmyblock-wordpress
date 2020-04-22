@@ -10,6 +10,7 @@ require get_parent_theme_file_path( '/inc/wp-tidy.php' );
 require get_parent_theme_file_path( '/inc/wp-enqueue.php' );
 
 require get_parent_theme_file_path( '/inc/carbon-fields.php' );
+require get_parent_theme_file_path( '/inc/media-attribution.php' );
 
 require get_parent_theme_file_path( '/inc/functions-general.php' );
 require get_parent_theme_file_path( '/inc/functions-navbar.php' );
