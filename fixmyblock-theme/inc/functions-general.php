@@ -76,14 +76,11 @@ function the_page_title_and_description() {
 function the_feature_section() {
     $html = '';
 
-    $feature_html = get_the_post_thumbnail();
-
+    $feature_html = get_the_post_thumbnail( null, get_layout_meta( 'thumbnail_size' ) );
     if ( $feature_html ) {
-        $html .= '<div class="page-section page-section--feature">' . "\n";
-        $html .= '<div class="page-section__only">' . "\n";
+        $html .= get_layout_meta( 'thumbnail_before' );
         $html .= $feature_html;
-        $html .= '</div>' . "\n";
-        $html .= '</div>' . "\n";
+        $html .= get_layout_meta( 'thumbnail_after' );
     }
 
     echo $html;

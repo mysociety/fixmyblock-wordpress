@@ -15,13 +15,19 @@ if ( is_front_page() ) { ?>
     </div>
 <?php }
 
+if ( is_layout( 'feature-full-width' ) ) {
+    the_feature_section();
+}
+
 start_site_content();
 
 if ( have_posts() ) {
     while ( have_posts() ) {
         the_post(); ?>
 
-        <?php the_feature_section(); ?>
+      <?php if ( is_layout( 'feature-narrow' ) || is_layout( 'feature-wide' ) ) {
+          the_feature_section();
+      } ?>
 
       <?php if ( ! is_front_page() ) { ?>
         <div class="page-section">
