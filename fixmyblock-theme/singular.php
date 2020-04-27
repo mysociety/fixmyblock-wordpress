@@ -1,7 +1,7 @@
 <?php
 
-// page.php
-// Static "pages" (ie: not blog posts!) will be presented via this template.
+// singular.php
+// Individual posts and pages will be presented via this template.
 // https://developer.wordpress.org/themes/basics/template-hierarchy/
 
 get_header();
@@ -21,16 +21,20 @@ if ( have_posts() ) {
     while ( have_posts() ) {
         the_post(); ?>
 
+        <?php the_feature_section(); ?>
+
       <?php if ( ! is_front_page() ) { ?>
         <div class="page-section">
             <div class="page-section__primary">
                 <h1><?php the_title(); ?></h1>
+              <?php if ( get_post_type() == 'post' ) { ?>
+                <time datetime="<?php the_time( 'Y-m-d' ); ?>"><?php the_time('jS F Y'); ?></time>
+              <?php } elseif ( get_post_type() == 'page' ) { ?>
                 <?php the_table_of_contents(); ?>
+              <?php } ?>
             </div>
         </div>
       <?php } ?>
-
-      <?php the_feature_section(); ?>
 
         <div class="page-section">
             <div class="page-section__primary">
