@@ -71,19 +71,9 @@ function get_the_media_credits( $post = 0 ) {
 
     // Collect credit info for each attachment.
     foreach ( $attachment_ids as $id ) {
-        $source_url = get_post_meta( $id, '_source_url', true);
-        $creator_name = get_post_meta( $id, '_creator_name', true);
-        $license_url = get_post_meta( $id, '_license_url', true);
-        $license_name = get_post_meta( $id, '_license_name', true);
-
-        if ( $source_url && $creator_name && $license_url && $license_name ) {
-            $credits[] = array(
-                "title" => get_the_title( $id ),
-                "source_url" => $source_url,
-                "creator_name" => $creator_name,
-                "license_url" => $license_url,
-                "license_name" => $license_name,
-            );
+        $credit = get_credit_html_for_attachment( $id );
+        if ( $credit ) {
+            $credits[] = $credit;
         }
     }
 
@@ -98,14 +88,7 @@ function get_the_media_credits( $post = 0 ) {
         $html .= '<ul>' . "\n";
 
         foreach ( $credits as $credit ) {
-            $html .= sprintf(
-                '<li>%s by <a href="%s" target="_blank">%s</a>, <a href="%s" target="_blank">%s</a>.</li>' . "\n",
-                esc_html( ucfirst( $credit['title'] ) ),
-                esc_attr( $credit['source_url'] ),
-                esc_html( $credit['creator_name'] ),
-                esc_attr( $credit['license_url'] ),
-                esc_html( $credit['license_name'] )
-            );
+            $html .= $credit;
         }
 
         $html .= '</ul>' . "\n";
@@ -118,4 +101,55 @@ function get_the_media_credits( $post = 0 ) {
 
 function the_media_credits() {
     echo get_the_media_credits();
+}
+
+
+function get_credit_html_for_attachment( $id ) {
+    $title = get_the_title( $id );
+    $source_url = get_post_meta( $id, '_source_url', true);
+    $creator_name = get_post_meta( $id, '_creator_name', true);
+    $license_url = get_post_meta( $id, '_license_url', true);
+    $license_name = get_post_meta( $id, '_license_name', true);
+
+    $format = get_format_for_credit(
+        $title,
+        $source_url,
+        $creator_name,
+        $license_url,
+        $license_name
+    );
+
+    $html = sprintf(
+        $format,
+        esc_html( ucfirst( $title ) ),
+        esc_attr( $source_url ),
+        esc_html( $creator_name ),
+        esc_attr( $license_url ),
+        esc_html( $license_name )
+    );
+
+    if ( $html != '' ) {
+        return $html;
+    } else {
+        return null;
+    }
+}
+
+
+function get_format_for_credit( $title, $source_url, $creator_name, $license_url, $license_name ) {
+    if ( $title && $source_url && $creator_name && $license_url && $license_name ) {
+        return '<li>%1$s by <a href="%2$s" target="_blank">%3$s</a>, <a href="%4$s" target="_blank">%5$s</a>.</li>' . "\n";
+    } elseif ( $title && $source_url && $creator_name && $license_name ) {
+        return '<li>%1$s by <a href="%2$s" target="_blank">%3$s</a>, %5$s.</li>' . "\n";
+    } elseif ( $title && $source_url && $creator_name ) {
+        return '<li>%1$s by <a href="%2$s" target="_blank">%3$s</a>.</li>' . "\n";
+    } elseif ( $title && $creator_name && $license_url && $license_name ) {
+        return '<li>%1$s by %3$s, <a href="%4$s" target="_blank">%5$s</a>.</li>' . "\n";
+    } elseif ( $title && $creator_name && $license_name ) {
+        return '<li>%1$s by %3$s, %5$s.</li>' . "\n";
+    } elseif ( $title && $creator_name ) {
+        return '<li>%1$s by %3$s.</li>' . "\n";
+    } else {
+        return '';
+    }
 }
