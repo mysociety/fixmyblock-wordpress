@@ -63,9 +63,10 @@ function define_post_list_block() {
 }
 
 function render_post_list_block( $fields, $attributes, $inner_blocks ) {
-    $className = 'post-list';
+    $post_list_args = array();
+
     if ( isset($attributes['className']) ) {
-        $className = $className . ' ' . $attributes['className'];
+        $post_list_args['extra_classes'] = $attributes['className'];
     }
 
     # By default, find all posts of all types.
@@ -123,14 +124,7 @@ function render_post_list_block( $fields, $attributes, $inner_blocks ) {
     $results = get_posts( $query_params );
 
     if ( $results ) {
-        echo sprintf(
-            '<div class="%s">' . "\n",
-            esc_attr( $className )
-        );
-
-        echo post_list( $results, array( 'show_excerpt' => true ) );
-
-        echo '</div>' . "\n";
+        echo post_list( $results, $post_list_args );
     }
 }
 

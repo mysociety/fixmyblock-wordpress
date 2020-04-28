@@ -1,16 +1,29 @@
 <?php
 
 function post_list( $posts, $args = array() ) {
-    echo '<div class="post-list">' . "\n";
+    // Set defaults for any arguments we care about in post_list.
+    // We’ll leave the rest to the default handling in post_list_item.
+    $defaults = array(
+        'extra_list_classes' => '',
+    );
+    $a = wp_parse_args( $args, $defaults );
+
+    echo sprintf(
+        '<div class="%s">' . "\n",
+        esc_attr( trim( 'post-list ' . $a['extra_list_classes'] ) )
+    );
+
     foreach( $posts as $p ) {
         echo post_list_item( $p, $args );
     }
+
     echo '</div>' . "\n";
 }
 
 function post_list_item( $post, $args = array() ) {
     $defaults = array(
-        'show_excerpt' => true,
+        'show_excerpts' => true,
+        'show_thumbnails' => true,
         'heading_tag' => 'h2',
     );
     $a = wp_parse_args( $args, $defaults );
@@ -31,7 +44,7 @@ function post_list_item( $post, $args = array() ) {
             get_the_time( 'jS F Y', $post )
       );
     }
-    if ( $a['show_excerpt'] ) {
+    if ( $a['show_excerpts'] ) {
         echo sprintf(
             '<div class="post-list__item__excerpt">%s</div>' . "\n",
             get_the_excerpt($post)
