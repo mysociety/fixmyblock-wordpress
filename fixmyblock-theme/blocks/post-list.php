@@ -57,7 +57,12 @@ function define_post_list_block() {
                 __( 'Order by' )
             )->set_options(
                 $sort_options
-            )->set_width(50)
+            )->set_width(50),
+            Field::make(
+                'text',
+                'more_url',
+                __( '“Show more” URL (optional)' )
+            ),
         )
     )->set_render_callback( 'render_post_list_block' );
 }
@@ -67,6 +72,10 @@ function render_post_list_block( $fields, $attributes, $inner_blocks ) {
 
     if ( isset($attributes['className']) ) {
         $post_list_args['extra_classes'] = $attributes['className'];
+    }
+
+    if ( isset($fields['more_url']) ) {
+        $post_list_args['more_url'] = $fields['more_url'];
     }
 
     # By default, find all posts of all types.

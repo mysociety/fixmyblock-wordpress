@@ -19,6 +19,22 @@
     max-width: 40em;
 }
 
+.post-list__item--more {
+    a {
+        display: block;
+        flex: 1 1 auto;
+        margin: -0.75rem -0.5rem;
+        padding: 0.5rem;
+        text-align: right;
+
+        &:after {
+            content: "\2192";
+            display: inline-block;
+            margin-left: 0.5rem;
+        }
+    }
+}
+
 .post-list__item__image {
     float: left; // fallback if no flex support
     flex: 0 0 auto;

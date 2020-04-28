@@ -5,6 +5,7 @@ function post_list( $posts, $args = array() ) {
     // We’ll leave the rest to the default handling in post_list_item.
     $defaults = array(
         'extra_list_classes' => '',
+        'more_url' => '',
     );
     $a = wp_parse_args( $args, $defaults );
 
@@ -15,6 +16,15 @@ function post_list( $posts, $args = array() ) {
 
     foreach( $posts as $p ) {
         echo post_list_item( $p, $args );
+    }
+
+    if ( $a['more_url'] ) {
+        echo '<div class="post-list__item post-list__item--more">' . "\n";
+        echo sprintf(
+            '<a href="%s">Show more</a>',
+            $a['more_url']
+        );
+        echo '</div>' . "\n";
     }
 
     echo '</div>' . "\n";
