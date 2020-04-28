@@ -28,6 +28,17 @@ function define_related_items_block() {
                     array( 'type' => 'post', 'post_type' => 'page' ),
                 )
             ),
+            Field::make(
+                'select',
+                'display_as',
+                __( 'Display as' )
+            )->set_options(
+                array(
+                    0 => __( 'List, with square images (default)' ),
+                    1 => __( 'List, without images' ),
+                    2 => __( 'Grid, with wide images' ),
+                )
+            ),
         )
     )->set_render_callback( 'render_related_items_block' );
 }
@@ -36,10 +47,17 @@ function render_related_items_block( $fields, $attributes, $inner_blocks ) {
     $results = array();
     $post_list_args = array(
         'heading_tag' => 'h3',
+        'extra_list_classes' => '',
     );
 
     if ( isset($attributes['className']) ) {
-        $post_list_args['extra_classes'] = $attributes['className'];
+        $post_list_args['extra_list_classes'] .= ' ' . $attributes['className'];
+    }
+
+    if ( isset($fields['display_as']) && $fields['display_as'] == 2 ) {
+        $post_list_args['extra_list_classes'] .= ' post-list--grid';
+    } elseif ( isset($fields['display_as']) && $fields['display_as'] == 1 ) {
+        $post_list_args['show_thumbnails'] = false;
     }
 
     foreach ( $fields['related_items'] as $r ) {

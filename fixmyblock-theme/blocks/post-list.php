@@ -59,6 +59,17 @@ function define_post_list_block() {
                 $sort_options
             )->set_width(50),
             Field::make(
+                'select',
+                'display_as',
+                __( 'Display as' )
+            )->set_options(
+                array(
+                    0 => __( 'List, with square images (default)' ),
+                    1 => __( 'List, without images' ),
+                    2 => __( 'Grid, with wide images' ),
+                )
+            ),
+            Field::make(
                 'text',
                 'more_url',
                 __( '“Show more” URL (optional)' )
@@ -68,14 +79,22 @@ function define_post_list_block() {
 }
 
 function render_post_list_block( $fields, $attributes, $inner_blocks ) {
-    $post_list_args = array();
+    $post_list_args = array(
+        'extra_list_classes' => '',
+    );
 
     if ( isset($attributes['className']) ) {
-        $post_list_args['extra_classes'] = $attributes['className'];
+        $post_list_args['extra_list_classes'] .= ' ' . $attributes['className'];
     }
 
     if ( isset($fields['more_url']) ) {
         $post_list_args['more_url'] = $fields['more_url'];
+    }
+
+    if ( isset($fields['display_as']) && $fields['display_as'] == 2 ) {
+        $post_list_args['extra_list_classes'] .= ' post-list--grid';
+    } elseif ( isset($fields['display_as']) && $fields['display_as'] == 1 ) {
+        $post_list_args['show_thumbnails'] = false;
     }
 
     # By default, find all posts of all types.

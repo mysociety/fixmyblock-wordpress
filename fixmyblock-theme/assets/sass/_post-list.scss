@@ -48,6 +48,11 @@
     @include media-breakpoint-up('xl') {
         width: 7.5rem
     }
+
+    // This extra image is only for card view.
+    .size-feature-narrow {
+        display: none;
+    }
 }
 
 .post-list__item__title {
@@ -59,4 +64,82 @@
     display: block;
     margin-bottom: ( $spacer / 2 );
     color: $text-muted;
+}
+
+// Optional "card" layout.
+@supports (display: grid) {
+    .post-list--grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-column-gap: $spacer * 2;
+        grid-row-gap: $spacer * 2;
+
+        @include media-breakpoint-up('lg') {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .post-list__item {
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+            background: #fff;
+            border: 1px solid rgba(#000, 0.2);
+            border-radius: $border-radius;
+        }
+
+        .post-list__item--more {
+            grid-column: 1 / 2; // force onto new line
+            border: none;
+            padding: 0.5rem 0;
+
+            a {
+                text-align: left;
+            }
+        }
+
+        .post-list__item__image {
+            width: auto;
+            float: none;
+            flex: 0 0 auto;
+            margin: 0;
+
+            .size-feature-narrow {
+                display: block;
+            }
+
+            .size-post-thumbnail {
+                display: none;
+            }
+
+            img {
+                border-radius: $border-radius $border-radius 0 0;
+            }
+        }
+
+        .post-list__item__content {
+            position: relative;
+            padding: 1.5rem;
+            border-top: 1px solid rgba(#000, 0.2);
+        }
+
+        .post-list__item__title {
+            font-size: 1.75rem;
+
+            // Make whole card appear clickable
+            a:after {
+                content: "";
+                display: block;
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+            }
+        }
+
+        .post-list__item__date,
+        .post-list__item__excerpt {
+            font-size: 0.875rem;
+        }
+    }
 }

@@ -41,16 +41,10 @@ function post_list_item( $post, $args = array() ) {
     echo '<div class="post-list__item">' . "\n";
 
     if ( $a['show_thumbnails'] ) {
-        $thumbnail_html = get_the_post_thumbnail( $post );
-        if ( $thumbnail_html == '' ) {
-            $thumbnail_html = sprintf(
-                '<img src="%s" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" width="360" height="360">',
-                esc_attr( get_template_directory_uri() . '/assets/img/default-post-thumbnail-360x360.png' )
-            );
-        }
         echo sprintf(
-            '<div class="post-list__item__image">%s</div>' . "\n",
-            $thumbnail_html
+            '<a href="%s" class="post-list__item__image">%s</a>' . "\n",
+            esc_url( get_permalink( $post ) ),
+            get_post_list_thumbnails( $post )
         );
     }
 
@@ -80,4 +74,24 @@ function post_list_item( $post, $args = array() ) {
     echo '</div>' . "\n";
 
     echo '</div>' . "\n";
+}
+
+function get_post_list_thumbnails( $post ) {
+    $html = '';
+
+    if ( has_post_thumbnail( $post ) ) {
+        $html .= get_the_post_thumbnail( $post, 'post-thumbnail' ) . "\n";
+        $html .= get_the_post_thumbnail( $post, 'feature-narrow' ) . "\n";
+    } else {
+        $html .= sprintf(
+            '<img src="%s" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" width="360" height="360">' . "\n",
+            esc_attr( get_template_directory_uri() . '/assets/img/default-post-thumbnail-360x360.png' )
+        );
+        $html .= sprintf(
+            '<img src="%s" class="attachment-post-thumbnail size-feature-narrow wp-post-image" alt="" width="640" height="360">' . "\n",
+            esc_attr( get_template_directory_uri() . '/assets/img/default-post-thumbnail-640x360.png' )
+        );
+    }
+
+    return $html;
 }
