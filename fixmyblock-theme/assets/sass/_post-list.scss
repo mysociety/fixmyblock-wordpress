@@ -1,18 +1,42 @@
 .post-list {
+    margin-top: ( $spacer * 1.5 );
 
+    @include media-breakpoint-up('sm') {
+        margin-bottom: ( $spacer * 4 );
+    }
+
+    &:first-child {
+        margin-top: 0;
+    }
 }
 
 .post-list__item {
-    margin: ( $spacer * 2 ) 0;
+    @include clearfix(); // fallback if no flex support
+    display: flex;
+    border-top: 1px solid rgba(#000, 0.1);
+    padding-top: ( $spacer * 2 );
+    margin-bottom: ( $spacer * 2 );
     max-width: 40em;
+}
 
-    & > :last-child {
-        margin-bottom: 0;
+.post-list__item__image {
+    float: left; // fallback if no flex support
+    flex: 0 0 auto;
+    width: 5rem;
+    margin-right: 1.5rem;
+
+    @include media-breakpoint-up('lg') {
+        width: 6.5rem;
+    }
+
+    @include media-breakpoint-up('xl') {
+        width: 7.5rem
     }
 }
 
 .post-list__item__title {
     margin-bottom: ( $spacer / 2 );
+    margin-top: -0.25rem !important; // compensate for line-height
 }
 
 .post-list__item__date {
