@@ -14,7 +14,7 @@ function define_related_items_block() {
             Field::make(
                 'text',
                 'title',
-                __( 'Title' )
+                __( 'Title (optional)' )
             )->set_default_value(
                 __( 'Related guides' )
             ),
@@ -33,33 +33,34 @@ function define_related_items_block() {
 }
 
 function render_related_items_block( $fields, $attributes, $inner_blocks ) {
-    $className = 'related-items';
-    if ( isset($attributes['className']) ) {
-        $className = $className . ' ' . $attributes['className'];
-    }
-    echo sprintf(
-        '<div class="%s">' . "\n",
-        esc_attr( $className )
+    $results = array();
+    $post_list_args = array(
+        'heading_tag' => 'h3',
     );
 
-    if ( isset($fields['title']) ) {
-        echo sprintf(
-            '<h2>%s</h2>' . "\n",
-            esc_html($fields['title'])
-        );
+    if ( isset($attributes['className']) ) {
+        $post_list_args['extra_classes'] = $attributes['className'];
     }
 
-    echo '<div class="post-list">' . "\n";
-
     foreach ( $fields['related_items'] as $r ) {
-        if ( $r['type'] == 'post' ) {
-            $p = get_post( $r['id'] );
-            echo post_list_item( $p, array( 'heading_tag' => 'h3' ) );
+        $p = get_post( $r['id'] );
+        if ( $p ) {
+            $results[] = $p;
         }
     }
 
-    echo '</div>' . "\n";
-    echo '</div>' . "\n";
+    if ( $results ) {
+        // Optional title for backwards compatibility.
+        // Really if they want a title, they should use a separate title block.
+        if ( isset($fields['title']) ) {
+            echo sprintf(
+                '<h2>%s</h2>' . "\n",
+                esc_html( $fields['title'] )
+            );
+        }
+
+        echo post_list( $results, $post_list_args );
+    }
 }
 
 add_action( 'carbon_fields_register_fields', 'define_related_items_block' );
