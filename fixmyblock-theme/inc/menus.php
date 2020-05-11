@@ -8,5 +8,6 @@ add_action( 'after_setup_theme', 'register_navwalker' );
 register_nav_menus(
     array(
         'header' => 'Header menu',
+        'footer' => 'Footer menu',
     )
 );

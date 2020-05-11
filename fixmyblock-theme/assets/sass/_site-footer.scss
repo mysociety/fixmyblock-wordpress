@@ -7,20 +7,30 @@
     a {
         color: $gray-200;
 
-        @include hover() {
+        @include hover-focus() {
             color: $white;
+            text-decoration: none;
         }
     }
 
-    ul {
-        margin: 0 ($list-inline-padding * -1);
-        padding: 0;
-        list-style: none;
-        display: flex;
-        justify-content: flex-end;
+    .nav {
+        margin-left: ($grid-gutter-width / 2 * -1);
+        margin-right: ($grid-gutter-width / 2 * -1);
     }
 
-    li {
-        margin: 0 $list-inline-padding;
+    .nav-link {
+        padding: $nav-link-padding-y ($grid-gutter-width / 2);
+    }
+
+    .widget {
+        margin-top: 1rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(#fff, 0.2);
+    }
+
+    .widget__title {
+        font-size: 1em;
+        font-weight: bold;
+        color: $gray-200;
     }
 }

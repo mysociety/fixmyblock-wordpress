@@ -1,15 +1,28 @@
     <footer class="site-footer">
         <div class="container">
-            <ul>
+
+            <ul class="nav flex-column flex-sm-row">
+                <?php wp_nav_menu( array(
+                    'theme_location' => 'footer',
+                    'items_wrap' => '%3$s',
+                    'container' => false,
+                    'depth' => 1,
+                    'fallback_cb' => 'WP_Bootstrap_Navwalker::fallback',
+                    'walker' => new WP_Bootstrap_Navwalker()
+                ) ); ?>
               <?php if ( is_user_logged_in() ) { ?>
-                <?php $current_user = wp_get_current_user(); ?>
-                <li>Logged in as <a href="<?php echo get_edit_user_link(); ?>"><?php echo $current_user->display_name; ?></a></li>
-                <li><a href="<?php echo get_dashboard_url(); ?>">Dashboard</a></li>
-                <li><a href="<?php echo wp_logout_url(get_permalink()); ?>">Log out</a></li>
+                <li class="nav-item ml-sm-auto">
+                    <a href="<?php echo wp_logout_url(get_permalink()); ?>" class="nav-link">Log out</a>
+                </li>
               <?php } else { ?>
-                <li><a href="<?php echo wp_login_url(); ?>">Staff login</a></li>
+                <li class="nav-item ml-sm-auto">
+                    <a href="<?php echo wp_login_url(); ?>" class="nav-link">Staff login</a>
+                </li>
               <?php } ?>
             </ul>
+
+            <?php dynamic_sidebar( 'footer-sidebar' ); ?>
+
         </div>
     </footer>
 
