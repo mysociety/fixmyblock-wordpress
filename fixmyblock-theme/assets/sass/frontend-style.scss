@@ -29,7 +29,7 @@
 // @import "bootstrap/progress";
 // @import "bootstrap/media";
 // @import "bootstrap/list-group";
-// @import "bootstrap/close";
+@import "bootstrap/close";
 // @import "bootstrap/toasts";
 // @import "bootstrap/modal";
 // @import "bootstrap/tooltip";
@@ -59,6 +59,7 @@
 @import "table-of-contents";
 @import "feature-image";
 @import "image-credits";
+@import "site-banner";
 
 // Styles for specific pages
 @import "home";

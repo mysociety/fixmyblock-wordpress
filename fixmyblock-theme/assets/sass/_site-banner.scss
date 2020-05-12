@@ -1,0 +1,46 @@
+.site-banner {
+    padding: 1rem 0;
+
+    .container {
+        & > :first-child {
+            margin-top: 0;
+        }
+
+        & > :last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .close {
+        padding: 0 0.5rem;
+        margin: 0 -0.5rem;
+        color: inherit;
+    }
+
+    .close ~ * {
+        margin-right: 2rem;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: underline;
+
+        @include hover() {
+            opacity: 0.8;
+        }
+    }
+}
+
+.site-banner--sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1; // position above .site-header
+
+    // Wordpress admin bar is sticky on wide screens,
+    // so we need to leave space for that above the banner.
+    @media (min-width: 783px) {
+        body.admin-bar & {
+            top: 32px;
+        }
+    }
+}

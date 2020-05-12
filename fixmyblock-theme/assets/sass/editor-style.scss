@@ -134,3 +134,22 @@ p.lead {
         display: none;
     }
 }
+
+// Live "preview" for banner post type
+.site-banner {
+    overflow: auto;
+
+    .cf-block__preview,
+    .editor-rich-text {
+        color: inherit;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: underline;
+
+        @include hover() {
+            opacity: 0.8;
+        }
+    }
+}

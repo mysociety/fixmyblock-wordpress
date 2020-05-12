@@ -22,6 +22,9 @@ require get_parent_theme_file_path( '/inc/functions-table-of-contents.php' );
 require get_parent_theme_file_path( '/inc/layouts.php' );
 require get_parent_theme_file_path( '/inc/menus.php' );
 require get_parent_theme_file_path( '/inc/widgets.php' );
+require get_parent_theme_file_path( '/inc/banners.php' );
+
+require get_parent_theme_file_path( '/post-types/banner.php' );
 
 require get_parent_theme_file_path( '/blocks/related-items.php' );
 require get_parent_theme_file_path( '/blocks/post-list.php' );
