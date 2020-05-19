@@ -1,3 +1,9 @@
+// Note! WordPress does some icky stuff with the editor stylesheet:
+// 1. If a "body" selector exists, it will be replaced with ".editor-styles-wrapper".
+// 2. All other selectors will have ".editor-styles-wrapper" prepended to them.
+// More info:
+// https://developer.wordpress.org/block-editor/developers/themes/theme-support/#editor-styles
+
 @import "variables";
 @import "mixins";
 
@@ -5,10 +11,10 @@
 @import "bootstrap/variables";
 @import "bootstrap/mixins";
 
-// TODO: How do we apply { background-color: $body-bg; } to the
-// .editor-styles-wrapper given that WordPress takes the contents of
-// this stylesheet and adds ".editor-styles-wrapper " to the start of
-// each selector anyway? Maybe it could go in admin-style.scss?
+body {
+    background-color: $body-bg;
+    color: $body-color;
+}
 
 .cf-block__preview,
 .editor-rich-text {
@@ -16,7 +22,6 @@
     @include font-size($font-size-base);
     font-weight: $font-weight-base;
     line-height: $line-height-base;
-    color: $body-color;
 
     a {
         color: $link-color;
