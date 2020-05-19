@@ -1,0 +1,165 @@
+.wpcf7-form {
+    input[type="date"],
+    input[type="email"],
+    input[type="number"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="text"],
+    input[type="url"],
+    select,
+    textarea {
+        display: block;
+        width: 100%;
+        height: $input-height;
+        padding: $input-padding-y $input-padding-x;
+        font-family: $input-font-family;
+        @include font-size($input-font-size);
+        font-weight: $input-font-weight;
+        line-height: $input-line-height;
+        color: $input-color;
+        background-color: $input-bg;
+        background-clip: padding-box;
+        border: $input-border-width solid $input-border-color;
+        @include border-radius($input-border-radius, 0);
+        @include box-shadow($input-box-shadow);
+        @include transition($input-transition);
+
+        &:-moz-focusring {
+            color: transparent;
+            text-shadow: 0 0 0 $input-color;
+        }
+
+        @include form-control-focus($ignore-warning: true);
+
+        &::placeholder {
+            color: $input-placeholder-color;
+            opacity: 1;
+        }
+
+        &.wpcf7-not-valid {
+            border-color: $form-feedback-invalid-color;
+
+            &:focus {
+                border-color: $form-feedback-invalid-color;
+                box-shadow: 0 0 0 $input-focus-width rgba($form-feedback-invalid-color, .25);
+            }
+        }
+    }
+
+    :disabled,
+    [readonly] {
+        background-color: $input-disabled-bg !important;
+        opacity: 1 !important;
+    }
+
+    select {
+        &::-ms-expand {
+            background-color: transparent;
+            border: 0;
+        }
+
+        &:focus::-ms-value {
+            color: $input-color;
+            background-color: $input-bg;
+        }
+    }
+
+    select[size],
+    select[multiple],
+    textarea {
+        height: auto;
+    }
+
+    label {
+        display: block; // full width
+    }
+}
+
+.wpcf7-form-control-wrap {
+    display: block;
+    margin-top: $label-margin-bottom;
+}
+
+span.wpcf7-list-item {
+    margin: 0;
+    margin-right: 1rem;
+}
+
+.wpcf7-submit {
+    display: inline-block;
+    font-family: $btn-font-family;
+    font-weight: $btn-font-weight;
+    text-align: center;
+    white-space: $btn-white-space;
+    vertical-align: middle;
+    cursor: if($enable-pointer-cursor-for-buttons, pointer, null);
+    user-select: none;
+    border-width: $btn-border-width;
+    border-style: solid;
+    @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $btn-line-height, $btn-border-radius);
+    @include transition($btn-transition);
+
+    @include hover() {
+        text-decoration: none;
+    }
+
+    &:focus,
+    &.focus {
+        outline: 0;
+        box-shadow: $btn-focus-box-shadow;
+    }
+
+    // Disabled comes first so active can properly restyle
+    &.disabled,
+    &:disabled {
+        opacity: $btn-disabled-opacity;
+        @include box-shadow(none);
+    }
+
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled).active {
+        @include box-shadow($btn-active-box-shadow);
+
+        &:focus {
+            @include box-shadow($btn-focus-box-shadow, $btn-active-box-shadow);
+        }
+    }
+
+    @include button-variant($primary, $primary);
+}
+
+span.wpcf7-not-valid-tip {
+    display: block;
+    width: 100%;
+    margin-top: $form-feedback-margin-top;
+    @include font-size($form-feedback-font-size);
+    color: $form-feedback-invalid-color;
+}
+
+.wpcf7-not-valid .wpcf7-list-item-label {
+    color: $form-feedback-invalid-color;
+}
+
+div.wpcf7-response-output {
+    margin: $alert-margin-bottom 0;
+    padding: $alert-padding-y $alert-padding-x;
+    border: $alert-border-width solid transparent;
+    @include border-radius($alert-border-radius);
+}
+
+div.wpcf7-validation-errors,
+div.wpcf7-acceptance-missing {
+    @include alert-variant(
+        theme-color-level("danger", $alert-bg-level),
+        theme-color-level("danger", $alert-border-level),
+        theme-color-level("danger", $alert-color-level)
+    );
+}
+
+div.wpcf7-mail-sent-ok {
+    @include alert-variant(
+        theme-color-level("success", $alert-bg-level),
+        theme-color-level("success", $alert-border-level),
+        theme-color-level("success", $alert-color-level)
+    );
+}
