@@ -28,6 +28,7 @@ services:
     volumes:
       - wordpress:/var/www/html
       - ./fixmyblock-theme:/var/www/html/wp-content/themes/fixmyblock-theme
+      - ./conf/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
 
   db:
     image: mysql:5.7
