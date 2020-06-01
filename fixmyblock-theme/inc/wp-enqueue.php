@@ -2,12 +2,6 @@
 
 function enqueue_frontend_stylesheets() {
     wp_enqueue_style(
-        'google-fonts',
-        'https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,500;0,600;0,800;1,400;1,500;1,600;1,800&display=swap',
-        array(),
-        null
-    );
-    wp_enqueue_style(
         'fixmyblock-frontend-style',
         get_theme_file_uri('/assets/css/frontend-style.css'),
         array(),
@@ -38,12 +32,6 @@ function enqueue_frontend_scripts() {
 add_action( 'wp_enqueue_scripts', 'enqueue_frontend_scripts' );
 
 function enqueue_admin_stylesheets() {
-    wp_enqueue_style(
-        'google-fonts',
-        'https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,500;0,600;0,800;1,400;1,500;1,600;1,800&display=swap',
-        array(),
-        null
-    );
     wp_enqueue_style(
         'fixmyblock-admin-style',
         get_theme_file_uri('/assets/css/admin-style.css'),
