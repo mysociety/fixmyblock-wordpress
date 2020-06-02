@@ -1,20 +1,91 @@
-$color-fmb-yellow: #ffe000;
-$color-fmb-pale-yellow: #FFFBD7;
-$color-fmb-blue: #006FD6;
-$color-fmb-black: #333;
-$color-fmb-grey: #888;
+// Color system
 
-$primary: $color-fmb-yellow;
+$white: #fff;
+$gray-100: #F8F9FA; // used for $light
+$gray-600: #718590; // used for $secondary and $border-color
+$gray-800: #343a40; // used for $dark
+$black: #000;
 
-$link-color: $color-fmb-blue;
+$blue: #006FD6;
+$pink: #F6449C;
+$red: #F50400;
+$orange: #FD9B14;
+$yellow: #ffe000;
+$green: #0EB43A;
+$teal: #00CECB;
+$cyan: #00B7EB;
+
+$blue-100: #EBF5FF;
+$pink-100: #FFEEF7;
+$red-100: #FFE6E6;
+$orange-100: #FFF3E1;
+$yellow-100: #FFFBD7;
+$green-100: #E4FEEB;
+$teal-100: #DCF9F9;
+$cyan-100: #DDF6FD;
+
+$primary: $yellow;
+$secondary: $gray-600;
+$success: $green;
+$info: $cyan;
+$warning: $orange;
+$danger: $red;
+$light: $gray-100;
+$dark: $gray-800;
+
+$block-palette: (
+    'blue': $blue,
+    'pink': $pink,
+    'red': $red,
+    'orange': $orange,
+    'yellow': $yellow,
+    'green': $green,
+    'teal': $teal,
+    'cyan': $cyan,
+    'white': $white,
+    'gray-100': $gray-100,
+    'gray-600': $gray-600,
+    'black': $black,
+    'blue-100': $blue-100,
+    'pink-100': $pink-100,
+    'red-100': $red-100,
+    'orange-100': $orange-100,
+    'yellow-100': $yellow-100,
+    'green-100': $green-100,
+    'teal-100': $teal-100,
+    'cyan-100': $cyan-100,
+);
+
+// Options
+
+// Spacing
+
+// Body
+
+// Links
+
+$link-color: $blue;
+
+// Paragraphs
+
+// Grid breakpoints
+
+// Grid containers
+
+// Grid columns
+
+// Components
 
 $line-height-lg: 1.66;
 $line-height-sm: 1.66;
 
 $border-width: 2px;
-$border-color: $color-fmb-grey;
+$border-color: $gray-600;
 
-$component-active-bg: $color-fmb-blue;
+$component-active-color: $white;
+$component-active-bg: $blue;
+
+// Typography
 
 $font-family-sans-serif: "Inter", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 $line-height-base: 1.66;
@@ -26,13 +97,71 @@ $lead-font-weight: normal;
 
 $hr-margin-y: 2rem;
 
+// Tables
+
+// Buttons + Forms
+
+// Buttons
+
+// Forms
+
 $input-border-color: $border-color;
 $input-box-shadow: none;
 
+// Form validation
+
+// Z-index master list
+
+// Navs
+
+// Navbar
+
 $navbar-nav-link-padding-x: 1rem;
 
-$navbar-light-color: $color-fmb-black;
+$navbar-light-color: $gray-800;
 $navbar-light-hover-color: #000;
 $navbar-light-active-color: #000;
-$navbar-light-disabled-color: rgba($color-fmb-black, .6);
-$navbar-light-toggler-border-color: rgba($color-fmb-black, .6) !default;
+$navbar-light-disabled-color: rgba($gray-800, .6);
+$navbar-light-toggler-border-color: rgba($gray-800, .6) !default;
+
+// Dropdowns
+
+// Pagination
+
+// Jumbotron
+
+// Cards
+
+// Tooltips
+
+// Popovers
+
+// Toasts
+
+// Badges
+
+// Modals
+
+// Alerts
+
+// Progress bars
+
+// List group
+
+// Image thumbnails
+
+// Figures
+
+// Breadcrumbs
+
+// Carousel
+
+// Spinners
+
+// Close
+
+// Code
+
+// Utilities
+
+// Printing

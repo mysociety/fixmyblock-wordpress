@@ -111,3 +111,14 @@ a img.alignleft {
     border: 0;
     border-top: $hr-border-width solid $hr-border-color;
 }
+
+// Using :root here because /wp-includes/dist/css/block-library/style.css does.
+@each $slug, $color in $block-palette {
+    :root .has-#{$slug}-color {
+        color: $color;
+    }
+
+    :root .has-#{$slug}-background-color {
+        background-color: $color;
+    }
+}
