@@ -14,3 +14,11 @@ img {
     max-width: 100%;
     height: auto;
 }
+
+// Very quick and dirty way to add spacing between
+// "regular" list items (eg: excluding nav lists).
+ul:not([class]) {
+    & > li + li {
+        margin-top: 0.5em;
+    }
+}
