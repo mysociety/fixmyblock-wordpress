@@ -82,6 +82,15 @@ p.lead {
     }
 }
 
+// List item spacing, to match the ones in _type.scss.
+ul.rich-text {
+    & > li + li,
+    & > li > ul,
+    & > li > ul > li + li {
+        margin-top: 0.5em;
+    }
+}
+
 .wp-block {
     .cf-block__fields {
         margin: 0;
