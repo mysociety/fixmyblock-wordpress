@@ -12,7 +12,7 @@ services:
       - "127.0.0.1:8170:80"
 
   fixmyblock:
-    image: wordpress
+    image: wordpress:php7.2-apache
     restart: always
     environment:
       WORDPRESS_DB_HOST: db
