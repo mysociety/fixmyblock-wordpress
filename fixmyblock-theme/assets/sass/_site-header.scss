@@ -14,12 +14,15 @@
 }
 
 .navbar-nav {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+
     .nav-link {
         display: block;
-        font-size: 1.5rem;
         font-weight: 500;
+        padding: 0.25rem 1rem;
 
-        @include media-breakpoint-up(md) {
+        @include media-breakpoint-up(lg) {
             font-size: 1.2rem;
         }
 
@@ -47,6 +50,7 @@
         .nav-link {
             border-top: 1px solid rgba(#000, 0.2);
             padding: 0.5rem 0;
+            font-size: 1.2em;
         }
 
         .dropdown-menu {
