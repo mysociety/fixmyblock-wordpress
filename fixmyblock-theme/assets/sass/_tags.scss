@@ -1,0 +1,28 @@
+.tag-links {
+    margin: -0.25em -0.25rem $spacer -0.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    @include media-breakpoint-up('sm') {
+        margin-bottom: ( $spacer * 4 );
+    }
+}
+
+.tag-link {
+    display: inline-block;
+    color: $body-color;
+    border: $border-width solid $gray-300;
+    line-height: 1;
+    padding: 0.4em 0.8em;
+    margin: 0.25rem;
+    border-radius: 2em;
+
+    &:hover {
+        border-color: $gray-400;
+    }
+}
+
+.tag-link--emphasised {
+    font-size: 1.3em;
+}
