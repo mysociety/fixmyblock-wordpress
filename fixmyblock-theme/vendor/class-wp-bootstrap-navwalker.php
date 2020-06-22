@@ -356,14 +356,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 					}
 					$fallback_output .= '>';
 				}
-				$fallback_output .= '<ul';
-				if ( $menu_id ) {
-					$fallback_output .= ' id="' . esc_attr( $menu_id ) . '"'; }
-				if ( $menu_class ) {
-					$fallback_output .= ' class="' . esc_attr( $menu_class ) . '"'; }
-				$fallback_output .= '>';
 				$fallback_output .= '<li class="nav-item"><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '" class="nav-link" title="' . esc_attr__( 'Add a menu', 'wp-bootstrap-navwalker' ) . '">' . esc_html__( 'Add a menu', 'wp-bootstrap-navwalker' ) . '</a></li>';
-				$fallback_output .= '</ul>';
 				if ( $container ) {
 					$fallback_output .= '</' . esc_attr( $container ) . '>';
 				}
