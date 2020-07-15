@@ -58,6 +58,8 @@ $block-palette: (
 
 // Options
 
+$enable-responsive-font-sizes: true;
+
 // Spacing
 
 // Body
@@ -69,6 +71,14 @@ $link-color: $blue;
 // Paragraphs
 
 // Grid breakpoints
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
 
 // Grid containers
 
@@ -165,3 +175,10 @@ $navbar-light-toggler-border-color: rgba($gray-800, .6) !default;
 // Utilities
 
 // Printing
+
+// Responsive font sizes
+
+$rfs-base-font-size: 0.875rem;
+$rfs-breakpoint: map-get($grid-breakpoints, 'lg');
+$rfs-breakpoint-unit: unit($rfs-breakpoint);
+$rfs-factor: 5;
