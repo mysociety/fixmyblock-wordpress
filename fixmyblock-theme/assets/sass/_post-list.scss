@@ -13,6 +13,7 @@
 .post-list__item {
     @include clearfix(); // fallback if no flex support
     display: flex;
+    align-items: flex-start;
     border-top: 1px solid rgba(#000, 0.1);
     padding-top: ( $spacer * 2 );
     margin-bottom: ( $spacer * 2 );
