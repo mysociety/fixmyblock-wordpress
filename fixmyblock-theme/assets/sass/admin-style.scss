@@ -47,3 +47,41 @@
         width: 100%;
     }
 }
+
+// Tidy up Carbon Fields containers when they’re situated in the
+// "Document" sidebar on the post edit screen.
+.edit-post-meta-boxes-area {
+    #poststuff .carbon-box {
+        h2, h3 {
+            font-size: 13px;
+            color: #191e23;
+            border-bottom: none;
+        }
+
+        .inside {
+            border-bottom: none;
+        }
+    }
+
+    .postbox .handlediv {
+        position: relative;
+        z-index: 1;
+    }
+
+    .cf-container {
+        .cf-field {
+            padding: 0 16px 16px 16px; // match .components-panel__body
+            border: none;
+        }
+
+        .cf-container__fields {
+            border: none;
+            margin: 0;
+        }
+
+        .cf-text__input {
+            padding: 6px 4px 6px 12px; // match .components-form-token-field__input and .components-form-token-field__input-container
+            min-height: 24px + 6px + 6px;
+        }
+    }
+}

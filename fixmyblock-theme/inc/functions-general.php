@@ -41,21 +41,41 @@ function end_site_content() {
 
 
 function the_page_title_and_description() {
-    // The title as displayed at the start of the page <title>.
-    // Use slashes as the separator, so that dates look sensible.
-    $title = wp_title( '/', false );
+    $queried_object = get_queried_object();
 
-    // Strip whitespace, then remove the leading slash, then
-    // strip whitespace again.
-    $title = trim( $title );
-    if ( substr($title, 0, 1) == '/' ) {
-        $title = substr( $title, 1 );
+    // Work out what page title to display, in roughly the same way
+    // that wp_get_document_title() does it, so the in-page title
+    // roughly matches the <title> in the <head>.
+    if ( is_404() ) {
+        $title = __( 'Page not found' );
+
+    } elseif ( is_front_page() ) {
+        $title = get_bloginfo( 'name', 'display' );
+
+    } elseif ( is_post_type_archive() ) {
+        $title = post_type_archive_title( '', false );
+
+    } elseif ( is_tax() || is_category() || is_tag() ) {
+        $title = ucfirst( single_term_title( '', false ) );
+
+    } elseif ( is_home() || is_singular() ) {
+        $title = single_post_title( '', false );
+
+    } elseif ( is_author() && $queried_object ) {
+        $title = $queried_object->display_name;
+
+    } elseif ( is_year() ) {
+        $title = get_the_date( _x( 'Y', 'yearly archives date format' ) );
+
+    } elseif ( is_month() ) {
+        $title = get_the_date( _x( 'F Y', 'monthly archives date format' ) );
+
+    } elseif ( is_day() ) {
+        $title = get_the_date();
+
+    } elseif ( is_search() ) {
+        $title = sprintf( __( 'Search Results for &#8220;%s&#8221;' ), get_search_query() );
     }
-    $title = trim( $title );
-
-    // Tags and categories might be all lowercase, but that looks silly
-    // in a page heading. So uppercase the first letter.
-    $title = ucfirst( $title );
 
     echo sprintf(
         '<h1>%s</h1>',

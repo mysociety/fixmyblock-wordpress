@@ -34,3 +34,16 @@ function modify_post_types_shown_on_taxonomy_archive_pages( $query ) {
     return $query;
 }
 add_filter( 'pre_get_posts', 'modify_post_types_shown_on_taxonomy_archive_pages' );
+
+
+// If you add a ?s= query parameter to the URL for a custom post type
+// archive page, only matching posts will be displayed. Great! But WordPress
+// also changes the document title to "Search results for…" which is a bit
+// misleading. We prefer to keep showing the post type name.
+function prefer_post_type_name_over_search_term_in_document_title( $title ) {
+    if ( is_post_type_archive() && is_search() ) {
+        $title['title'] = post_type_archive_title( '', false );
+    }
+    return $title;
+}
+add_filter('document_title_parts', 'prefer_post_type_name_over_search_term_in_document_title', 10);
