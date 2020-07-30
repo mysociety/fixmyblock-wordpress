@@ -56,6 +56,23 @@ function get_layout_meta( $key = null ) {
 }
 
 
+function get_the_layout( $post = null ) {
+    $post = get_post( $post );
+    $template = get_page_template_slug( $post );
+    if ( $template ) {
+        $matches = array();
+        $t = preg_match(
+            '%^layout-([^.]+)[.]php$%',
+            $template,
+            $matches
+        );
+        return $matches[1];
+    } else {
+        return 'feature-wide';
+    }
+}
+
+
 function get_default_page_template_title() {
     return 'Wide Feature Image (default)';
 }
