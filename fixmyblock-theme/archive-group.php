@@ -49,8 +49,7 @@ start_site_content();
                         </div>
                     </div>
                 </form>
-                <!-- TODO: Display something useful if no results -->
-                <?php get_template_part( 'templates/post-list' ); ?>
+                <?php echo post_list(); ?>
                 <?php the_posts_pagination(); ?>
             </div>
             <div class="page-section__secondary">

@@ -28,12 +28,7 @@ start_site_content();
 
         <div class="page-section">
             <div class="page-section__primary">
-              <?php if ( is_search() ) { global $wp_query; ?>
-                <?php if ( ! $wp_query->found_posts ) { ?>
-                  <p>We could not find any results for your search.</p>
-                <?php } ?>
-              <?php } ?>
-                <?php get_template_part( 'templates/post-list' ); ?>
+                <?php echo post_list(); ?>
                 <?php the_posts_pagination(); ?>
             </div>
             <div class="page-section__secondary">
