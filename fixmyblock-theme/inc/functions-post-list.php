@@ -77,12 +77,17 @@ function post_list_item( $post, $args = array() ) {
     );
     $a = wp_parse_args( $args, $defaults );
 
+    $url = carbon_get_post_meta( $post->ID, 'group_url' );
+    if ( ! $url ) {
+        $url = get_permalink($post);
+    }
+
     echo '<div class="post-list__item">' . "\n";
 
     if ( $a['show_thumbnails'] ) {
         echo sprintf(
             '<a href="%s" class="post-list__item__image">%s</a>' . "\n",
-            esc_url( get_permalink( $post ) ),
+            esc_url( $url ),
             get_post_list_thumbnails( $post )
         );
     }
@@ -92,7 +97,7 @@ function post_list_item( $post, $args = array() ) {
     echo sprintf(
         '<%s class="post-list__item__title"><a href="%s">%s</a></%s>' . "\n",
         esc_html( $a['heading_tag'] ),
-        esc_url( get_permalink($post) ),
+        esc_url( $url ),
         esc_html( get_the_title($post) ),
         esc_html( $a['heading_tag'] )
     );
