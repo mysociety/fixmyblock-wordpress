@@ -51,4 +51,8 @@ start_site_content();
             </div>
         </div>
 
-<?php get_footer();
+<?php
+
+end_site_content();
+
+get_footer();
