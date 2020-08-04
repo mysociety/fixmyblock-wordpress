@@ -134,14 +134,24 @@ function get_post_list_thumbnails( $post ) {
     if ( has_post_thumbnail( $post ) ) {
         $html .= get_the_post_thumbnail( $post, 'post-thumbnail' ) . "\n";
         $html .= get_the_post_thumbnail( $post, 'feature-narrow' ) . "\n";
+
     } else {
+        if ( $post->post_type == 'group' ) {
+            $filename = 'default-group-thumbnail';
+        // TODO: Nasty that the template-letters category slug is hard-coded here.
+        } else if ( has_category( 'template-letters', $post->ID ) ) {
+            $filename = 'default-letter-thumbnail';
+        } else {
+            $filename = 'default-post-thumbnail';
+        }
+
         $html .= sprintf(
             '<img src="%s" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" width="360" height="360">' . "\n",
-            esc_attr( get_template_directory_uri() . '/assets/img/default-post-thumbnail-360x360.png' )
+            esc_attr( get_template_directory_uri() . '/assets/img/' . $filename . '-360x360.png' )
         );
         $html .= sprintf(
             '<img src="%s" class="attachment-post-thumbnail size-feature-narrow wp-post-image" alt="" width="640" height="360">' . "\n",
-            esc_attr( get_template_directory_uri() . '/assets/img/default-post-thumbnail-640x360.png' )
+            esc_attr( get_template_directory_uri() . '/assets/img/' . $filename . '-640x360.png' )
         );
     }
 
