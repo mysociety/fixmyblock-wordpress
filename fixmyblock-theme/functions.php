@@ -28,6 +28,7 @@ require get_parent_theme_file_path( '/inc/cover-page.php' );
 
 require get_parent_theme_file_path( '/post-types/banner.php' );
 require get_parent_theme_file_path( '/post-types/group.php' );
+require get_parent_theme_file_path( '/taxonomies/category.php' );
 require get_parent_theme_file_path( '/taxonomies/group-area.php' );
 require get_parent_theme_file_path( '/taxonomies/group-type.php' );
 

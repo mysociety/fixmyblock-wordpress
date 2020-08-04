@@ -55,6 +55,15 @@
     }
 }
 
+.post-list__item__type {
+    font-size: 0.875em; // 14px on 16px
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $gray-600;
+    line-height: 1;
+    margin-bottom: 1em;
+}
+
 .post-list__item__title {
     margin-bottom: ( $spacer / 2 );
     margin-top: -0.25rem !important; // compensate for line-height

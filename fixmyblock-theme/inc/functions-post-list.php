@@ -94,6 +94,14 @@ function post_list_item( $post, $args = array() ) {
 
     echo '<div class="post-list__item__content">' . "\n";
 
+    $item_type = get_post_list_item_type( $post );
+    if ( $item_type ) {
+        echo sprintf(
+            '<p class="post-list__item__type">%s</p>' . "\n",
+            $item_type
+        );
+    }
+
     echo sprintf(
         '<%s class="post-list__item__title"><a href="%s">%s</a></%s>' . "\n",
         esc_html( $a['heading_tag'] ),
@@ -138,4 +146,32 @@ function get_post_list_thumbnails( $post ) {
     }
 
     return $html;
+}
+
+function get_post_list_item_type( $post ) {
+    if ( $post->post_type == 'group' ) {
+        $term_list = get_the_terms( $post, 'group_type' );
+        if ( ! empty($term_list) ) {
+            return join(', ', wp_list_pluck($term_list, 'name'));
+        } else {
+            $post_type_obj = get_post_type_object( 'group' );
+            return $post_type_obj->labels->singular_name;
+        }
+    } else {
+        $category_list = get_the_category( $post );
+        if ( ! empty($category_list) ) {
+            $names = array();
+            foreach ( $category_list as $term ) {
+                $singular_name = get_category_singular_name( $term->term_id );
+                if ( $singular_name ) {
+                    $names[] = $singular_name;
+                } else {
+                    $names[] = $term->name;
+                }
+            }
+            return join(', ', $names);
+        } else {
+            return '';
+        }
+    }
 }
