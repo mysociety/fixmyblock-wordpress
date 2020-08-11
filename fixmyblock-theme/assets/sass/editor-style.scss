@@ -15,10 +15,15 @@
 body {
     background-color: $body-bg;
     color: $body-color;
+    font-family: $font-family-base;
+    @include font-size($font-size-base);
+    font-weight: $font-weight-base;
+    line-height: $line-height-base;
 }
 
 .cf-block__preview,
-.editor-rich-text {
+.editor-rich-text,
+.block-editor-rich-text__editable {
     font-family: $font-family-base;
     @include font-size($font-size-base);
     font-weight: $font-weight-base;
