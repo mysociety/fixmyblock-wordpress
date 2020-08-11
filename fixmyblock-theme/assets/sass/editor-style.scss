@@ -12,6 +12,8 @@
 @import "bootstrap/variables";
 @import "bootstrap/mixins";
 
+@import "file-block";
+
 body {
     background-color: $body-bg;
     color: $body-color;

@@ -1,0 +1,63 @@
+.wp-block-file {
+    margin: 1.5em 0;
+    padding: 1em;
+    border-radius: $border-radius;
+    border: 1px solid rgba(#000, 0.2);
+    display: flex;
+    align-items: center;
+
+    // This will only match in the frontend, where
+    // there is no .wp-block-file__content-wrapper
+    & > a:first-child {
+        display: flex;
+        align-items: center;
+        flex: 1 1 auto; // fill all available space, and squish on narrow screens
+        margin-right: auto;
+        line-height: 1.4; // better than 1.66 default, for long filenames on narrow screens
+
+        &:before {
+            content: "";
+            display: block;
+            flex: 0 0 auto; // do not squish!
+            width: 32px;
+            height: 40px;
+            margin-right: 1rem;
+            @include svg-background-image('file-generic');
+            background-size: 32px 40px;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+        }
+
+        $filetypes: (
+            "pdf",
+            "docx",
+            "doc",
+            "xlsx",
+            "xls",
+            "pptx",
+            "ppt",
+        );
+
+        @each $filetype in $filetypes {
+            &[href$=".#{$filetype}"]:before {
+                @include svg-background-image("file-#{$filetype}");
+            }
+        }
+    }
+
+    .wp-block-file__button {
+        @include button-variant($primary, $primary);
+
+        // Hide the extra "Download" button on narrow screens.
+        @include media-breakpoint-down('sm') {
+            display: none;
+        }
+    }
+}
+
+// In the editor.
+.wp-block-file__content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
