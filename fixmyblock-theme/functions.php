@@ -19,6 +19,7 @@ require get_parent_theme_file_path( '/inc/functions-sidebars.php' );
 require get_parent_theme_file_path( '/inc/functions-post-list.php' );
 require get_parent_theme_file_path( '/inc/functions-taxonomies.php' );
 require get_parent_theme_file_path( '/inc/functions-table-of-contents.php' );
+require get_parent_theme_file_path( '/inc/functions-tag-list.php' );
 
 require get_parent_theme_file_path( '/inc/layouts.php' );
 require get_parent_theme_file_path( '/inc/menus.php' );
@@ -31,6 +32,8 @@ require get_parent_theme_file_path( '/post-types/group.php' );
 require get_parent_theme_file_path( '/taxonomies/category.php' );
 require get_parent_theme_file_path( '/taxonomies/group-area.php' );
 require get_parent_theme_file_path( '/taxonomies/group-type.php' );
+
+require get_parent_theme_file_path( '/widgets/tag-list.php' );
 
 require get_parent_theme_file_path( '/blocks/related-items.php' );
 require get_parent_theme_file_path( '/blocks/post-list.php' );

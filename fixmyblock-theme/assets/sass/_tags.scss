@@ -7,6 +7,10 @@
     @include media-breakpoint-up('sm') {
         margin-bottom: ( $spacer * 4 );
     }
+
+    .sidebar & {
+        font-size: 0.875em;
+    }
 }
 
 .tag-link {
