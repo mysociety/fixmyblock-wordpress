@@ -17,7 +17,7 @@ set_wordpress_permissions () {
     # https://codex.wordpress.org/Changing_File_Permissions
     # https://www.smashingmagazine.com/2014/05/proper-wordpress-filesystem-permissions-ownerships/
     cd /home/vagrant/wordpress
-    sudo find . -exec chown vagrant:web {} +
+    sudo find . -exec chown www-data:www-data {} +
     sudo find . -type f -exec chmod 664 {} +
     sudo find . -type d -exec chmod 775 {} +
     sudo chmod 660 wp-config.php
@@ -82,9 +82,11 @@ mysql -ne "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';"
 mysql -ne "FLUSH PRIVILEGES"
 
 # Install PHP and associated modules
-# php7.4-gd is so Wordpress can manipulate images / thumbnails.
-# php7.4-curl, php7.4-mbstring, php7.4-soap, and php7.4-xml are handy to have just in case.
-$install php7.4 libapache2-mod-php7.4 php7.4-mysql php7.4-gd php7.4-curl php7.4-mbstring php7.4-soap php7.4-xml
+# https://make.wordpress.org/hosting/handbook/handbook/server-environment/#php-extensions
+$install php7.4 imagemagick ghostscript libapache2-mod-php7.4 php7.4-curl php7.4-mbstring php7.4-mysqli php7.4-gd php7.4-imagick php7.4-xml php7.4-zip
+
+# Copy php.ini file into place
+sudo cp /home/vagrant/shared/provision/php.ini /etc/php/7.4/apache2/conf.d/90-vagrant.ini
 
 # Install Git (for Go)
 $install git
@@ -114,10 +116,8 @@ sudo cp /home/vagrant/shared/provision/mailhog.service /etc/systemd/system/mailh
 sudo systemctl start mailhog
 sudo systemctl enable mailhog
 
-# Create a new user group for us (vagrant) and apache (www-data)
-sudo groupadd web
-sudo usermod -a -G web vagrant
-sudo usermod -a -G web www-data
+# Add us (vagrant) and to the apache user group (www-data)
+sudo usermod -a -G www-data vagrant
 
 # Download phpMyAdmin
 if ! [ -e "/home/vagrant/phpmyadmin" ]; then
