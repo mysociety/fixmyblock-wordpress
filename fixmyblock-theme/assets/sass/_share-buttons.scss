@@ -1,0 +1,74 @@
+.btn-facebook {
+    @include button-variant($color-facebook-blue, $color-facebook-blue);
+
+    &:before {
+        @include svg-background-image('icon-facebook');
+    }
+}
+
+.btn-twitter {
+    @include button-variant($color-twitter-blue, $color-twitter-blue);
+
+    &:before {
+        @include svg-background-image('icon-twitter');
+    }
+}
+
+.btn-whatsapp {
+    @include button-variant($color-whatsapp-green, $color-whatsapp-green);
+
+    &:before {
+        @include svg-background-image('icon-whatsapp');
+    }
+}
+
+.btn-linkedin {
+    @include button-variant($color-linkedin-blue, $color-linkedin-blue);
+
+    &:before {
+        @include svg-background-image('icon-linkedin');
+    }
+}
+
+.btn-gmail {
+    @include button-variant($color-gmail-red, $color-gmail-red);
+
+    &:before {
+        @include svg-background-image('icon-gmail');
+    }
+}
+
+.btn-copylink {
+    @include button-variant($gray-600, $gray-600);
+
+    &:before {
+        @include svg-background-image('icon-copylink');
+    }
+}
+
+.share-buttons {
+    margin: -0.5rem;
+
+    .btn {
+        margin: 0.5rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        &:before {
+            content: '';
+            display: inline-block;
+            height: 1.25em; // 20px in a regular sized button
+            width: 1.25em;
+            background-repeat: no-repeat;
+            background-position: 0 0;
+            background-size: 100%;
+            margin-right: 0.5em;
+        }
+    }
+
+    .sidebar-widget & .btn {
+        display: block;
+        display: flex;
+    }
+}
