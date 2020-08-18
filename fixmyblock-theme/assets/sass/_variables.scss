@@ -33,6 +33,12 @@ $danger: $red;
 $light: $gray-100;
 $dark: $gray-800;
 
+$color-facebook-blue: #3b5998;
+$color-twitter-blue: #1da1f2;
+$color-linkedin-blue: #0077b5;
+$color-whatsapp-green: #25d366;
+$color-gmail-red: #ea4335;
+
 $block-palette: (
     'blue': $blue,
     'pink': $pink,
@@ -110,6 +116,8 @@ $hr-margin-y: 2rem;
 // Tables
 
 // Buttons + Forms
+
+$input-btn-padding-y-sm: 0.15rem; // down from 0.25, because of 1.66 line-height.
 
 // Buttons
 

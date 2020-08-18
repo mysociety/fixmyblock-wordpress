@@ -47,8 +47,8 @@ class TagListWidget extends Widget {
     }
 }
 
-function load_widgets() {
+function load_tag_list_widget() {
     register_widget( 'TagListWidget' );
 }
 
-add_action( 'widgets_init', 'load_widgets' );
+add_action( 'widgets_init', 'load_tag_list_widget' );
