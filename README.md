@@ -52,7 +52,10 @@ You will need [Composer](https://getcomposer.org/) installed if you want to upda
 
     brew install composer
 
-You can then run `composer install` from inside the `fixmyblock-theme` directory, on the host machine.
+You can then tell Composer to install the latest version of the PHP packages:
+
+    cd fixmyblock-theme
+    composer update
 
 ## Dealing with compiled CSS
 
