@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -e
+cd "$(dirname "$0")/.."
+cp -r ./fixmyblock-theme /var/www/vhosts/fixmyblock.org/httpdocs/wp-content/themes
+
