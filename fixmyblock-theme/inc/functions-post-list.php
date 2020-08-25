@@ -138,8 +138,8 @@ function get_post_list_thumbnails( $post ) {
     } else {
         if ( $post->post_type == 'group' ) {
             $filename = 'default-group-thumbnail';
-        // TODO: Nasty that the template-letters category slug is hard-coded here.
-        } else if ( has_category( 'template-letters', $post->ID ) ) {
+        // TODO: Nasty that the "letters" category slug is hard-coded here.
+        } else if ( has_category( 'letters', $post->ID ) ) {
             $filename = 'default-letter-thumbnail';
         } else {
             $filename = 'default-post-thumbnail';
