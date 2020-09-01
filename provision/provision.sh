@@ -162,7 +162,7 @@ wp core install --url="$WORDPRESS_SITEURL" --title="$WORDPRESS_SITENAME" --admin
 set_wordpress_permissions
 
 # Symlink the theme into wordpress instance
-symlink /home/vagrant/shared/fixmyblock-theme /home/vagrant/wordpress/wp-content/themes/fixmyblock-theme
+sudo_symlink /home/vagrant/shared/fixmyblock-theme /home/vagrant/wordpress/wp-content/themes/fixmyblock-theme
 
 # Symlink web directories
 sudo_symlink /home/vagrant/wordpress /var/www/wordpress
