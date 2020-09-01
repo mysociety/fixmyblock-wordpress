@@ -32,6 +32,7 @@ if ( have_posts() ) {
       <?php if ( ! is_front_page() ) { ?>
         <div class="page-section">
             <div class="page-section__primary">
+                <?php dynamic_sidebar( 'pre-title-sidebar' ); ?>
                 <h1><?php the_title(); ?></h1>
               <?php if ( get_post_type() == 'post' ) { ?>
                 <time datetime="<?php the_time( 'Y-m-d' ); ?>"><?php the_time('jS F Y'); ?></time>
@@ -44,7 +45,9 @@ if ( have_posts() ) {
 
         <div class="page-section">
             <div class="page-section__primary">
+                <?php if ( ! is_front_page() ) { dynamic_sidebar( 'pre-content-sidebar' ); } ?>
                 <?php the_content(); ?>
+                <?php if ( ! is_front_page() ) { dynamic_sidebar( 'post-content-sidebar' ); } ?>
                 <?php the_media_credits(); ?>
             </div>
             <div class="page-section__secondary">

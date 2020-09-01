@@ -54,5 +54,38 @@ function register_widgets() {
         'before_title'  => '<h2 class="widget__title">',
         'after_title'   => "</h2>\n",
     ), $defaults ) );
+
+    register_sidebar( wp_parse_args( array(
+        'name' => 'Posts and pages: before title',
+        'id' => 'pre-title-sidebar',
+        'description' => 'Shown above the title on blog posts and pages, but not on the front page or any archive pages.',
+        'class' => 'pre-title-sidebar',
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => "</div>\n",
+        'before_title'  => '<h2 class="widget__title">',
+        'after_title'   => "</h2>\n",
+    ), $defaults ) );
+
+    register_sidebar( wp_parse_args( array(
+        'name' => 'Posts and pages: before content',
+        'id' => 'pre-content-sidebar',
+        'description' => 'Shown between the title and the content on blog posts and pages, but not on the front page or any archive pages.',
+        'class' => 'pre-content-sidebar',
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => "</div>\n",
+        'before_title'  => '<h2 class="widget__title">',
+        'after_title'   => "</h2>\n",
+    ), $defaults ) );
+
+    register_sidebar( wp_parse_args( array(
+        'name' => 'Posts and pages: after content',
+        'id' => 'post-content-sidebar',
+        'description' => 'Shown below the content on blog posts and pages, but not on the front page or any archive pages.',
+        'class' => 'post-content-sidebar',
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => "</div>\n",
+        'before_title'  => '<h2 class="widget__title">',
+        'after_title'   => "</h2>\n",
+    ), $defaults ) );
 }
 add_action( 'widgets_init', 'register_widgets' );

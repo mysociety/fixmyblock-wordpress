@@ -17,6 +17,10 @@
     @include media-breakpoint-up('md') {
         @include make-col(7);
     }
+
+    .widget {
+        margin-bottom: $spacer;
+    }
 }
 
 .page-section__secondary {
