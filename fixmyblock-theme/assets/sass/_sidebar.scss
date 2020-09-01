@@ -15,7 +15,9 @@
     }
 
     .sidebar-widget__title,
-    .helpful-headline {
-        @include font-size($h4-font-size);
+    .helpful-headline,
+    .search-form label {
+        @include font-size($font-size-base);
+        font-weight: $headings-font-weight;
     }
 }
