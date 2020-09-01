@@ -8,22 +8,15 @@ function block_has_id( $block ) {
     return false !== strpos( $block['innerHTML'], 'id=' );
 }
 
+// NOTE: Assumes the HTML element in innerHTML has an id attribute!
 function extract_heading_info( $block ) {
-    $success = preg_match(
-        '/<h(?<level>\d)[^>]+id="(?<id>[^"]+)">/',
-        $block['innerHTML'],
-        $matches
+    $el = \FMB\DOM\html_element_as_array( $block['innerHTML'] );
+    return array(
+        'el' => $el,
+        'id' => \FMB\DOM\get_element_attribute( $el, 'id' ),
+        'level' => intval( substr( $el['tagName'], 1, 1 ) ),
+        'inner_html' => \FMB\DOM\get_inner_html( $el ),
     );
-
-    if ( $success ) {
-        return array(
-            'id' => $matches['id'],
-            'level' => intval( $matches['level'] ),
-            'text' => wp_strip_all_tags( $block['innerHTML'] ),
-        );
-    } else {
-        return array();
-    }
 }
 
 function the_table_of_contents( $post = 0 ) {
@@ -36,7 +29,6 @@ function the_table_of_contents( $post = 0 ) {
 
         foreach ( $blocks as $block ) {
             if ( block_is_heading( $block ) && block_has_id( $block ) ) {
-                // TODO: Eventually might want to nest headings by "level".
                 $headings[] = extract_heading_info( $block );
             }
         }
@@ -49,7 +41,7 @@ function the_table_of_contents( $post = 0 ) {
                 echo sprintf(
                     '<li><a href="#%s">%s</a></li>' . "\n",
                     $heading['id'],
-                    $heading['text']
+                    wp_strip_all_tags( $heading['inner_html'] )
                 );
             }
             echo '</ol>' . "\n";
@@ -57,3 +49,22 @@ function the_table_of_contents( $post = 0 ) {
         }
     }
 }
+
+function move_heading_id_to_child_anchor( $block_content, $block ) {
+    if ( block_is_heading( $block ) && block_has_id( $block ) ) {
+        $b = extract_heading_info( $block );
+        return sprintf(
+            '%s<a id="%s" class="fragment"></a>%s%s',
+            \FMB\DOM\remove_attribute(
+                'id',
+                \FMB\DOM\get_opening_tag_html( $b['el'] )
+            ),
+            $b['id'],
+            $b['inner_html'],
+            \FMB\DOM\get_closing_tag_html( $b['el'] )
+        );
+    }
+    return $block_content;
+}
+
+add_filter( 'render_block', 'move_heading_id_to_child_anchor', 10, 2 );

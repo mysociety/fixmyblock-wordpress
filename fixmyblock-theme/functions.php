@@ -14,6 +14,7 @@ require get_parent_theme_file_path( '/inc/carbon-fields.php' );
 require get_parent_theme_file_path( '/inc/media-attribution.php' );
 
 require get_parent_theme_file_path( '/inc/functions-general.php' );
+require get_parent_theme_file_path( '/inc/functions-dom.php' );
 require get_parent_theme_file_path( '/inc/functions-navbar.php' );
 require get_parent_theme_file_path( '/inc/functions-sidebars.php' );
 require get_parent_theme_file_path( '/inc/functions-post-list.php' );
