@@ -113,6 +113,14 @@ ul.rich-text {
     }
 }
 
+.wp-block[data-type="carbon-fields/table-of-contents"] {
+    .cf-block__preview {
+        min-height: 0;
+        padding: 1rem;
+        background: rgba(139, 139, 150, .1); // match .wp-block-shortcode
+    }
+}
+
 .wp-block[data-type="carbon-fields/big-number"] {
     counter-increment: big-number;
 

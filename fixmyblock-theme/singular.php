@@ -36,8 +36,6 @@ if ( have_posts() ) {
                 <h1><?php the_title(); ?></h1>
               <?php if ( get_post_type() == 'post' ) { ?>
                 <time datetime="<?php the_time( 'Y-m-d' ); ?>"><?php the_time('jS F Y'); ?></time>
-              <?php } elseif ( get_post_type() == 'page' ) { ?>
-                <?php the_table_of_contents(); ?>
               <?php } ?>
             </div>
         </div>

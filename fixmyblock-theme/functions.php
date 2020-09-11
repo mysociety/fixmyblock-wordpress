@@ -44,3 +44,4 @@ require get_parent_theme_file_path( '/blocks/post-list.php' );
 require get_parent_theme_file_path( '/blocks/big-number.php' );
 require get_parent_theme_file_path( '/blocks/tag-list.php' );
 require get_parent_theme_file_path( '/blocks/share-buttons.php' );
+require get_parent_theme_file_path( '/blocks/table-of-contents.php' );

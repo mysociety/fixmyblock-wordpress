@@ -1,10 +1,5 @@
 .table-of-contents {
-    margin-top: ($spacer * 1.5);
-
-    @include media-breakpoint-up('lg') {
-        margin-top: ($spacer * 3);
-        margin-bottom: ($spacer * 1.5) !important;
-    }
+    margin: ($spacer * 1.5) 0;
 
     h2 {
         font-size: 1em;
