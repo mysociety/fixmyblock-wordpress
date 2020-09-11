@@ -12,28 +12,27 @@
 @import "bootstrap/variables";
 @import "bootstrap/mixins";
 
+@import "bootstrap/type";
+
+@import "type";
 @import "file-block";
 
 body {
     background-color: $body-bg;
     color: $body-color;
-}
-
-.cf-block__preview,
-.editor-rich-text {
     font-family: $font-family-base;
     @include font-size($font-size-base);
     font-weight: $font-weight-base;
     line-height: $line-height-base;
+}
 
-    a {
-        color: $link-color;
-        text-decoration: $link-decoration;
+a {
+    color: $link-color;
+    text-decoration: $link-decoration;
 
-        @include hover() {
-            color: $link-hover-color;
-            text-decoration: $link-hover-decoration;
-        }
+    @include hover() {
+        color: $link-hover-color;
+        text-decoration: $link-hover-decoration;
     }
 }
 
@@ -42,14 +41,17 @@ p {
     margin-bottom: $paragraph-margin-bottom;
 }
 
-p.lead {
-    @include font-size($lead-font-size);
-    font-weight: $lead-font-weight;
+ul.rich-text {
+    & > li + li,
+    & > li > ul,
+    & > li > ul > li + li {
+        margin-top: 0.5em;
+    }
 }
 
 .editor-post-title__input {
     font-family: ($headings-font-family or $font-family-base);
-    font-weight: $headings-font-weight;
+    font-weight: 900; // match _type.scss
     line-height: $headings-line-height;
     color: $headings-color;
     @include font-size($h1-font-size);
@@ -81,15 +83,6 @@ p.lead {
 
     &:before {
         content: "\2014\00A0"; // em dash, nbsp
-    }
-}
-
-// List item spacing, to match the ones in _type.scss.
-ul.rich-text {
-    & > li + li,
-    & > li > ul,
-    & > li > ul > li + li {
-        margin-top: 0.5em;
     }
 }
 
