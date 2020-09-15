@@ -44,11 +44,8 @@ sudo add-apt-repository -y ppa:ondrej/php
 # Update apt cache
 sudo apt-get update
 
-# Install Apache
-$install apache2
-
-# Activate Apache mod_rewrite
-sudo_symlink /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load
+# Install Nginx
+$install nginx
 
 # Install Maria DB (MySQL)
 $install mariadb-server-10.1
@@ -83,10 +80,14 @@ mysql -ne "FLUSH PRIVILEGES"
 
 # Install PHP and associated modules
 # https://make.wordpress.org/hosting/handbook/handbook/server-environment/#php-extensions
-$install php7.4 imagemagick ghostscript libapache2-mod-php7.4 php7.4-curl php7.4-mbstring php7.4-mysqli php7.4-gd php7.4-imagick php7.4-xml php7.4-zip
+$install php7.4 imagemagick ghostscript php7.4-curl php7.4-mbstring php7.4-mysqli php7.4-gd php7.4-imagick php7.4-xml php7.4-zip php7.4-fpm
 
-# Copy php.ini file into place
-sudo cp /home/vagrant/shared/provision/php.ini /etc/php/7.4/apache2/conf.d/90-vagrant.ini
+# Copy PHP configuration files into place
+sudo cp /home/vagrant/shared/provision/php.ini /etc/php/7.4/fpm/conf.d/90-vagrant.ini
+sudo_symlink /home/vagrant/shared/provision/wordpress-fpm.conf /etc/php/7.4/fpm/pool.d/wordpress.conf
+sudo_symlink /home/vagrant/shared/provision/phpmyadmin-fpm.conf /etc/php/7.4/fpm/pool.d/phpmyadmin.conf
+sudo rm /etc/php/7.4/fpm/pool.d/www.conf
+sudo systemctl restart php7.4-fpm
 
 # Install Git (for Go)
 $install git
@@ -116,7 +117,7 @@ sudo cp /home/vagrant/shared/provision/mailhog.service /etc/systemd/system/mailh
 sudo systemctl start mailhog
 sudo systemctl enable mailhog
 
-# Add us (vagrant) and to the apache user group (www-data)
+# Add us (vagrant) and to the nginx user group (www-data)
 sudo usermod -a -G www-data vagrant
 
 # Download phpMyAdmin
@@ -159,7 +160,9 @@ wp db reset --yes
 wp core install --url="$WORDPRESS_SITEURL" --title="$WORDPRESS_SITENAME" --admin_user="$WORDPRESS_ADMIN_USERNAME" --admin_password="$WORDPRESS_ADMIN_PASSWORD" --admin_email="$WORDPRESS_ADMIN_EMAIL" --skip-email
 
 # Set file permissions for Wordpress directory
-set_wordpress_permissions
+# Don't do this now! Leads to errors later in first boot provisioning, as although we've added the vagrant user to the 
+# www-data group, this will only take effect on the next login!
+#set_wordpress_permissions
 
 # Symlink the theme into wordpress instance
 sudo_symlink /home/vagrant/shared/fixmyblock-theme /home/vagrant/wordpress/wp-content/themes/fixmyblock-theme
@@ -168,23 +171,11 @@ sudo_symlink /home/vagrant/shared/fixmyblock-theme /home/vagrant/wordpress/wp-co
 sudo_symlink /home/vagrant/wordpress /var/www/wordpress
 sudo_symlink /home/vagrant/phpmyadmin /var/www/phpmyadmin
 
-# Tell Apache to listen on the right ports
-sudo rm -f /etc/apache2/ports.conf
-sudo_symlink /home/vagrant/shared/provision/ports.conf /etc/apache2/ports.conf
-
-# Prevent "Could not reliably determine the server's fully qualified domain name" warnings
-echo "ServerName localhost" | sudo tee /etc/apache2/conf-available/servername.conf
-sudo a2enconf servername
-sudo service apache2 reload
-
-# Symlink our Apache vhost conf files
-sudo_symlink /home/vagrant/shared/provision/wordpress-vhost.conf /etc/apache2/sites-available/wordpress.conf
-sudo_symlink /home/vagrant/shared/provision/phpmyadmin-vhost.conf /etc/apache2/sites-available/phpmyadmin.conf
-
-# Deactivate the default vhost, and activate our wordpress and phpmyadmin vhosts
-sudo a2dissite 000-default.conf
-sudo a2ensite wordpress.conf
-sudo a2ensite phpmyadmin.conf
+# Symlink our Nginx vhost conf files
+sudo_symlink /home/vagrant/shared/provision/wordpress-nginx.conf /etc/nginx/sites-enabled/wordpress.conf
+sudo_symlink /home/vagrant/shared/provision/phpmyadmin-nginx.conf /etc/nginx/sites-enabled/phpmyadmin.conf
+sudo rm -f /etc/nginx/sites-enabled/default
+sudo systemctl restart nginx
 
 # Tell PHP to send mail via Mailhog
 sudo cp /home/vagrant/shared/provision/mailhog.ini /etc/php/7.4/mods-available/mailhog.ini
@@ -207,8 +198,13 @@ wp plugin install check-email --activate
 cd /home/vagrant/wordpress
 wp rewrite structure '/%year%/%monthnum%/%postname%/' --hard
 
+# Run fixtures
+cd /home/vagrant/wordpress
+/home/vagrant/shared/bin/fixture
+
 # (Re)set file permissions for Wordpress directory
 set_wordpress_permissions
 
-# Finally restart/reload apache
-sudo service apache2 restart
+# Finally restart/reload nginx and php-fpm
+sudo systemctl restart php7.4-fpm
+sudo systemctl restart nginx

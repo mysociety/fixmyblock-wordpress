@@ -75,6 +75,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the Apache server manually, every time it finishes upping the VM.
   config.vm.provision :shell,
     :run => "always",
-    :inline => "service apache2 restart"
+    :inline => "systemctl restart php7.4-fpm; systemctl restart nginx"
 
 end
