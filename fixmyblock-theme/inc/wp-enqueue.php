@@ -2,6 +2,12 @@
 
 function enqueue_frontend_stylesheets() {
     wp_enqueue_style(
+        'google-fonts',
+        'https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap',
+        array(),
+        null
+    );
+    wp_enqueue_style(
         'fixmyblock-frontend-style',
         get_theme_file_uri('/assets/css/frontend-style.css'),
         array(),
@@ -33,6 +39,12 @@ add_action( 'wp_enqueue_scripts', 'enqueue_frontend_scripts' );
 
 function enqueue_admin_stylesheets() {
     wp_enqueue_style(
+        'google-fonts',
+        'https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap',
+        array(),
+        null
+    );
+    wp_enqueue_style(
         'fixmyblock-admin-style',
         get_theme_file_uri('/assets/css/admin-style.css'),
         array(),
@@ -47,3 +59,11 @@ function enqueue_editor_stylesheet() {
     );
 }
 add_action( 'admin_init', 'enqueue_editor_stylesheet' );
+
+function add_google_fonts_resource_hint($hints, $relation_type) {
+    if ( $relation_type === 'preconnect' ) {
+        $hints[] = 'https://fonts.gstatic.com';
+    }
+    return $hints;
+}
+add_filter( 'wp_resource_hints', 'add_google_fonts_resource_hint', 10, 2 );
