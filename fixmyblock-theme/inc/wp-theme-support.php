@@ -52,8 +52,13 @@ add_theme_support( 'custom-logo' );
 
 // https://developer.wordpress.org/block-editor/developers/themes/theme-support/#block-color-palettes
 add_theme_support( 'editor-color-palette', array(
-    // Arranged with yellow at the start of the colour wheel,
+    // Arranged with gold at the start of the colour wheel,
     // since that’s the primary site colour.
+    array(
+        'name' => 'Gold',
+        'slug' => 'gold',
+        'color' => '#ffc80a',
+    ),
     array(
         'name' => 'Yellow',
         'slug' => 'yellow',
@@ -113,6 +118,11 @@ add_theme_support( 'editor-color-palette', array(
         'name' => 'Black',
         'slug' => 'black',
         'color' => '#000',
+    ),
+    array(
+        'name' => 'Pale gold',
+        'slug' => 'gold-100',
+        'color' => '#FFF6D9',
     ),
     array(
         'name' => 'Pale yellow',

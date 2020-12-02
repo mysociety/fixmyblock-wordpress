@@ -3,31 +3,33 @@
 $white: #fff;
 $gray-100: #F8F9FA; // used for $light
 $gray-600: #718590; // used for $secondary and $border-color
-$gray-800: #343a40; // used for $dark
+$gray-800: #333333; // used for $dark
 $black: #000;
 
 $blue: #006FD6;
 $pink: #F6449C;
 $red: #F50400;
 $orange: #FD9B14;
+$gold: #FFC80A;
 $yellow: #ffe000;
 $green: #0EB43A;
 $teal: #00CECB;
-$cyan: #00B7EB;
+$turquoise: #008CA0;
 
 $blue-100: #EBF5FF;
 $pink-100: #FFEEF7;
 $red-100: #FFE6E6;
 $orange-100: #FFF3E1;
+$gold-100: #FFF6D9;
 $yellow-100: #FFFBD7;
 $green-100: #E4FEEB;
 $teal-100: #DCF9F9;
-$cyan-100: #DDF6FD;
+$turquoise-100: #DDF6FD;
 
-$primary: $yellow;
+$primary: $gold;
 $secondary: $gray-600;
 $success: $green;
-$info: $cyan;
+$info: $turquoise;
 $warning: $orange;
 $danger: $red;
 $light: $gray-100;
@@ -44,10 +46,11 @@ $block-palette: (
     'pink': $pink,
     'red': $red,
     'orange': $orange,
+    'gold': $gold,
     'yellow': $yellow,
     'green': $green,
     'teal': $teal,
-    'cyan': $cyan,
+    'turquoise': $turquoise,
     'white': $white,
     'gray-100': $gray-100,
     'gray-600': $gray-600,
@@ -56,10 +59,11 @@ $block-palette: (
     'pink-100': $pink-100,
     'red-100': $red-100,
     'orange-100': $orange-100,
+    'gold-100': $gold-100,
     'yellow-100': $yellow-100,
     'green-100': $green-100,
     'teal-100': $teal-100,
-    'cyan-100': $cyan-100,
+    'turquoise-100': $turquoise-100,
 );
 
 // Options
