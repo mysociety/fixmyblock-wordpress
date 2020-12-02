@@ -76,7 +76,7 @@ $enable-responsive-font-sizes: true;
 
 // Links
 
-$link-color: $blue;
+$link-color: darken($turquoise, 2.5%); // Increase contrast slightly to pass WCAG 2.1 AA
 
 // Paragraphs
 
