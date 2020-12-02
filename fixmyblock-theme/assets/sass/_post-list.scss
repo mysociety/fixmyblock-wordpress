@@ -67,6 +67,7 @@
 .post-list__item__title {
     margin-bottom: ( $spacer / 2 );
     margin-top: -0.25rem !important; // compensate for line-height
+    font-size: 1.75rem;
 }
 
 .post-list__item__date {
@@ -143,8 +144,6 @@
         }
 
         .post-list__item__title {
-            font-size: 1.75rem;
-
             // Make whole card appear clickable
             a:after {
                 content: "";
