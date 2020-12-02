@@ -12,9 +12,15 @@
 @import "bootstrap/mixins";
 
 @import "bootstrap/type";
+@import "bootstrap/buttons";
 
-@import "type";
+@import "contact-form-7";
 @import "file-block";
+@import "post-list";
+@import "share-buttons";
+@import "tags";
+@import "type";
+
 
 body {
     background-color: $body-bg;
