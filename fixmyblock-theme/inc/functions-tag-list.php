@@ -70,6 +70,10 @@ function get_tag_list_output_defaults( $options = array() ) {
     );
 }
 
+function sort_tags_by_count($a, $b) {
+    return $b->count - $a->count;
+}
+
 function get_tag_list_output( $options ) {
     $output = '';
     $tags = array();
@@ -82,9 +86,6 @@ function get_tag_list_output( $options ) {
 
     if ( $tags ) {
         if ( $options['order'] == 1 ) {
-            function sort_tags_by_count($a, $b) {
-                return $b->count - $a->count;
-            }
             usort($tags, "sort_tags_by_count");
         }
 
