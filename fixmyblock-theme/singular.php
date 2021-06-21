@@ -45,6 +45,8 @@ if ( have_posts() ) {
             <div class="page-section__primary">
                 <?php if ( ! is_front_page() ) { dynamic_sidebar( 'pre-content-sidebar' ); } ?>
                 <?php the_content(); ?>
+                <?php include 'delayed-survey.php';?>
+
                 <?php if ( ! is_front_page() ) { dynamic_sidebar( 'post-content-sidebar' ); } ?>
                 <?php the_media_credits(); ?>
             </div>
