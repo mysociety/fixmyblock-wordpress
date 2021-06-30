@@ -4,6 +4,7 @@ $white: #fff;
 $gray-100: #F8F9FA; // used for $light
 $gray-600: #718590; // used for $secondary and $border-color
 $gray-800: #333333; // used for $dark
+$gray-900: #212529;
 $black: #000;
 
 $blue: #006FD6;
@@ -54,7 +55,7 @@ $block-palette: (
     'white': $white,
     'gray-100': $gray-100,
     'gray-600': $gray-600,
-    'black': $black,
+    'black': $gray-900, // slight fudge, we use an off-black throughout the site
     'blue-100': $blue-100,
     'pink-100': $pink-100,
     'red-100': $red-100,

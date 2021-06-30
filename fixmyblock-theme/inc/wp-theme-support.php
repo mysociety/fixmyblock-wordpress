@@ -117,7 +117,7 @@ add_theme_support( 'editor-color-palette', array(
     array(
         'name' => 'Black',
         'slug' => 'black',
-        'color' => '#000',
+        'color' => '#212529',
     ),
     array(
         'name' => 'Pale gold',
