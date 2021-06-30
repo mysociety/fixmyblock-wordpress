@@ -22,7 +22,7 @@ require get_parent_theme_file_path( '/inc/functions-taxonomies.php' );
 require get_parent_theme_file_path( '/inc/functions-table-of-contents.php' );
 require get_parent_theme_file_path( '/inc/functions-tag-list.php' );
 require get_parent_theme_file_path( '/inc/functions-share-buttons.php' );
-
+require get_parent_theme_file_path( '/inc/functions-survey-signup.php' );
 
 require get_parent_theme_file_path( '/inc/layouts.php' );
 require get_parent_theme_file_path( '/inc/menus.php' );
@@ -38,10 +38,12 @@ require get_parent_theme_file_path( '/taxonomies/group-type.php' );
 
 require get_parent_theme_file_path( '/widgets/tag-list.php' );
 require get_parent_theme_file_path( '/widgets/share-buttons.php' );
+require get_parent_theme_file_path( '/widgets/survey-signup.php' );
 
 require get_parent_theme_file_path( '/blocks/related-items.php' );
 require get_parent_theme_file_path( '/blocks/post-list.php' );
 require get_parent_theme_file_path( '/blocks/big-number.php' );
 require get_parent_theme_file_path( '/blocks/tag-list.php' );
 require get_parent_theme_file_path( '/blocks/share-buttons.php' );
+require get_parent_theme_file_path( '/blocks/survey-signup.php' );
 require get_parent_theme_file_path( '/blocks/table-of-contents.php' );
