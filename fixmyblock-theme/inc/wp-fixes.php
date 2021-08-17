@@ -35,6 +35,19 @@ function modify_post_types_shown_on_taxonomy_archive_pages( $query ) {
 }
 add_filter( 'pre_get_posts', 'modify_post_types_shown_on_taxonomy_archive_pages' );
 
+// Sort posts on (category, tag, author, post_type) archive pages by
+// menu_order ("Order") first (lower numbers, to higher) then title
+// (lower letters to higher). Doesn’t affect sorting on the main
+// blog list page.
+function sort_taxonomy_archives_by_name( $query ) {
+    if ( is_archive() ) {
+        $query->set( 'orderby', 'menu_order title' );
+        $query->set( 'order', 'ASC' );
+    }
+    return $query;
+}
+add_action( 'pre_get_posts', 'sort_taxonomy_archives_by_name');
+
 
 // If you add a ?s= query parameter to the URL for a custom post type
 // archive page, only matching posts will be displayed. Great! But WordPress

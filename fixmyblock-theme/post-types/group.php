@@ -92,16 +92,6 @@ function group_updated_messages( $messages ) {
 add_filter( 'post_updated_messages', 'group_updated_messages' );
 
 
-function sort_group_archives_by_name( $query ) {
-    if ( is_post_type_archive('group') ) {
-        $query->set( 'orderby', 'title' );
-        $query->set( 'order', 'ASC' );
-    }
-    return $query;
-}
-add_action( 'pre_get_posts', 'sort_group_archives_by_name');
-
-
 Container::make(
     'post_meta',
     'More Group Attributes'
