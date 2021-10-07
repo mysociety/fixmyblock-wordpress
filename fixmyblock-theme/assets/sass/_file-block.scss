@@ -5,15 +5,22 @@
     border: 1px solid rgba(#000, 0.2);
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 
     // This will only match in the frontend, where
     // there is no .wp-block-file__content-wrapper
-    & > a:first-child {
+    & > a:first-child,
+    & > .wp-block-file__embed + a {
         display: flex;
         align-items: center;
         flex: 1 1 auto; // fill all available space, and squish on narrow screens
+        max-width: calc(100% - 7rem); // prevent flex wrap with long file names, 7rem is roughly width of download button
         margin-right: auto;
         line-height: 1.4; // better than 1.66 default, for long filenames on narrow screens
+
+        @include media-breakpoint-down('sm') {
+            max-width: none; // no need to prevent wrapping when download button is hidden on really narrow screens
+        }
 
         &:before {
             content: "";
@@ -53,6 +60,10 @@
             display: none;
         }
     }
+}
+
+.wp-block-file__embed {
+    border: 1px solid rgba(#000, 0.2);
 }
 
 // In the editor.
