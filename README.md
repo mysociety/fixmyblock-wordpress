@@ -81,3 +81,71 @@ Be a good citizen by following these standards when working on this project:
 * PHP files should _not_ end with `?>`.
 
 Otherwise, where there’s doubt, follow the [WordPress core coding standards](https://codex.wordpress.org/WordPress_Coding_Standards) for PHP, HTML, and CSS.
+
+## Deployment
+
+The live site, fixmyblock.org, is hosted by 34SP.
+
+34SP allows SSH connections, but access must be “unlocked” manually, from the 34SP control panel, as a safety feature. Access will be automatically locked again at the end of each day, unless you _permanently_ unlock it.
+
+On the server, the vhost lives at `/var/www/vhosts/fixmyblock.org`. Inside that directory:
+
+* `httpdocs/` is the directory the web server serves up, containing all the WordPress files.
+* `git/fixmyblock-wordpress.git/` is a bare Git repo, which you push to, in order to deploy.
+* `repos/fixmyblock-wordpress/` is the Git Work Tree where the bare repo’s `post-receive` hook checks out into.
+
+The bare repo has a `post-receive` hook that sets the Git Work Tree to `/var/www/vhosts/fixmyblock.org/repos/fixmyblock-wordpress`, checks out the latest version of the code, and then copies the `fixmyblock-theme` directory into place in `/var/www/vhosts/fixmyblock.org/httpdocs/wp-content/themes/`, using `rsync`. (We previously used a symlink for this, but 34SP broke it once when migrating TBUK to a new server and we figured an rsynced copy would be more resilient to the same thing happening again in the future. It also plays nicer with 34SP’s built-in “Pull to / push from staging” feature in case anyone ever uses that.)
+
+The `post-receive` hook on the server looks like this. It works out the vhost directory from its own location, and the branch to check out from the bare repo’s `HEAD`:
+
+    #!/bin/sh
+    set -e
+
+    # This file lives at $VHOST_DIR/git/fixmyblock-wordpress.git/hooks/post-receive
+    VHOST_DIR=$(cd "$(dirname "$0")/../../.." && pwd)
+    export GIT_WORK_TREE="$VHOST_DIR/repos/fixmyblock-wordpress"
+    THEMES_DIR="$VHOST_DIR/httpdocs/wp-content/themes"
+    BRANCH=$(git symbolic-ref --short HEAD)
+
+    echo "Checking out branch $BRANCH to $GIT_WORK_TREE"
+    mkdir -p "$GIT_WORK_TREE"
+    git checkout -f "$BRANCH"
+
+    echo "Copying fixmyblock-theme to $THEMES_DIR"
+    rsync --archive --delete "$GIT_WORK_TREE/fixmyblock-theme/" "$THEMES_DIR/fixmyblock-theme/"
+
+Meaning you can deploy to the live site, from your machine, by running a command like this:
+
+    git remote add live ssh://[username]@fixmyblock.org/var/www/vhosts/fixmyblock.org/git/fixmyblock-wordpress.git
+    git push live master
+
+If you ever need to re-run the hook without pushing any new commits (eg: because the work tree or theme directory has gone missing), you can run it manually on the server, eg:
+
+    cd /var/www/vhosts/fixmyblock.org/git/fixmyblock-wordpress.git
+    ./hooks/post-receive < /dev/null
+
+The bare repo has its `HEAD` set to the `master` branch. You can check (or change) this by running `git symbolic-ref HEAD` (or `git symbolic-ref HEAD refs/heads/master`) inside the bare repo.
+
+If you want to interact with the bare Git repo on the server, you’ll need to do something like:
+
+    cd /var/www/vhosts/fixmyblock.org/git/fixmyblock-wordpress.git
+    GIT_WORK_TREE='/var/www/vhosts/fixmyblock.org/repos/fixmyblock-wordpress' git status
+
+### Setting up the deployment endpoint from scratch
+
+If the `~/git` and `~/repos` directories ever go missing (as they did in October 2026, when 34SP accidentally deleted them), you can recreate them like this. First, on the server:
+
+    cd /var/www/vhosts/fixmyblock.org
+    mkdir -p git repos
+    git init --bare git/fixmyblock-wordpress.git
+    git --git-dir=git/fixmyblock-wordpress.git symbolic-ref HEAD refs/heads/master
+
+Then save the `post-receive` hook above to `git/fixmyblock-wordpress.git/hooks/post-receive`, and make it executable:
+
+    chmod +x git/fixmyblock-wordpress.git/hooks/post-receive
+
+Finally, from your machine, push to the new endpoint, which will check out the code and copy the theme into place:
+
+    git push live master
+
+Note that plugins and uploads are _not_ managed by this repo, and won’t be touched by the `post-receive` hook.
