@@ -1,47 +1,88 @@
-version: '3.7'
+x-wordpress-env: &wordpress-env
+  WORDPRESS_DB_HOST: db
+  WORDPRESS_DB_USER: fixmyblock
+  WORDPRESS_DB_PASSWORD: password
+  WORDPRESS_DB_NAME: fixmyblock
+  WORDPRESS_DEBUG: 1
+  # Log errors to `docker compose logs` rather than the page, since the
+  # bundled Carbon Fields triggers PHP 8.5 deprecation notices that would
+  # otherwise be output before WordPress sends its headers.
+  WORDPRESS_CONFIG_EXTRA: |
+    define( 'WP_DEBUG_DISPLAY', false );
+    define( 'WP_DEBUG_LOG', '/dev/stderr' );
 
 services:
 
-  nginx:
-    image: sagepe/nginx:0.0.1
-    volumes:
-        - ./conf/nginx.conf:/etc/nginx/sites-available/default:ro
-        - ./web:/var/www/html:ro
-        - ${HTPASSWD}:/etc/nginx/htpasswd
+  wordpress:
+    image: wordpress:php8.5-apache
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment: *wordpress-env
     ports:
-      - "127.0.0.1:8170:80"
-
-  fixmyblock:
-    image: wordpress
-    restart: always
-    environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: fixmyblock
-      WORDPRESS_DB_PASSWORD: password
-      WORDPRESS_DB_NAME: fixmyblock
-      WORDPRESS_SMTP_HOST: ${WORDPRESS_SMTP_HOST}
-      WORDPRESS_SMTP_PORT: ${WORDPRESS_SMTP_PORT}
-      WORDPRESS_SMTP_USERNAME: ${WORDPRESS_SMTP_USERNAME}
-      WORDPRESS_SMTP_PASSWORD: ${WORDPRESS_SMTP_PASSWORD}
-      WORDPRESS_SMTP_FROM: ${WORDPRESS_SMTP_FROM}
-      WORDPRESS_SMTP_FROM_NAME: ${WORDPRESS_SMTP_FROM_NAME}
+      - "8000:80"
     volumes:
       - wordpress:/var/www/html
       - ./fixmyblock-theme:/var/www/html/wp-content/themes/fixmyblock-theme
-      - ./conf/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - ./conf/mailpit.php:/var/www/html/wp-content/mu-plugins/mailpit.php:ro
+      - ./conf/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:ro
+
+  # Installs WordPress and activates the theme, then exits.
+  # Also handy for running other wp-cli commands, eg:
+  # docker compose run --rm wpcli wp plugin list
+  wpcli:
+    image: wordpress:cli-php8.5
+    user: "33:33" # www-data in the wordpress image
+    depends_on:
+      db:
+        condition: service_healthy
+      wordpress:
+        condition: service_started
+    environment:
+      <<: *wordpress-env
+      HOME: /tmp # so wp-cli can write its cache
+    volumes:
+      - wordpress:/var/www/html
+      - ./fixmyblock-theme:/var/www/html/wp-content/themes/fixmyblock-theme
+      - ./conf/mailpit.php:/var/www/html/wp-content/mu-plugins/mailpit.php:ro
+      - ./conf/wp-setup.sh:/usr/local/bin/wp-setup:ro
+      - ./bin:/fixmyblock/bin:ro
+    command: wp-setup
 
   db:
-    image: mysql:5.7
-    restart: always
+    image: mariadb:11.4
+    restart: unless-stopped
     environment:
-      MYSQL_DATABASE: fixmyblock
-      MYSQL_USER: fixmyblock
-      MYSQL_PASSWORD: password
-      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+      MARIADB_DATABASE: fixmyblock
+      MARIADB_USER: fixmyblock
+      MARIADB_PASSWORD: password
+      MARIADB_ROOT_PASSWORD: password
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 2s
+      retries: 30
     volumes:
       - db:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin:5
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: password
+    ports:
+      - "3000:80"
+
+  mailpit:
+    image: axllent/mailpit:v1.27
+    restart: unless-stopped
+    ports:
+      - "8025:8025"
 
 volumes:
   wordpress:
   db:
-

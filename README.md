@@ -4,37 +4,39 @@ An experimental WordPress theme for the Tower Block Action Guide.
 
 ## Local development
 
-If you want to work on this theme, you can preview your changes locally using the included Vagrant VM.
+If you want to work on this theme, you can preview your changes locally using the included Docker Compose setup.
 
-You will need [Vagrant](http://www.vagrantup.com/downloads.html) and [Virtualbox](https://www.virtualbox.org/) installed. For example, on a Mac with [Homebrew](https://brew.sh/), you might run:
+You will need [Docker](https://www.docker.com/products/docker-desktop/) installed.
 
-    brew cask install virtualbox
-    brew cask install vagrant
+Start the Docker stack with:
 
-You will also want to copy `.vagrant.yml.example` to `.vagrant.yml`, and add any required config options.
+    docker compose up
 
-    cp .vagrant.yml.example .vagrant.yml
+The first time you run this, it will download the required Docker images, then automatically install WordPress, activate the `fixmyblock-theme` theme, and install a couple of plugins that are useful for debugging email. Once the `wpcli` container reports that WordPress is ready (and exits), you can access:
 
-Now you can boot up the VM:
-
-    vagrant up
-
-The VM will automatically install WordPress, phpMyAdmin and MailHog, which you can access at:
-
-* WordPress: http://localhost:8000
+* WordPress: http://localhost:8000 (log in at http://localhost:8000/wp-admin with username `admin` and password `password`)
 * phpMyAdmin: http://localhost:3000
-* MailHog: http://localhost:8025
+* Mailpit: http://localhost:8025 (all email sent by WordPress ends up here)
 
-WordPress and MySQL usernames and passwords are defined at the top of `provision/provision.sh`.
+The `fixmyblock-theme` directory is mounted straight into the WordPress container, so any changes you make to the theme will show up immediately.
 
-There’s a fixtures script that sets up example menus, pages, etc, in WordPress. You must run it from inside the VM, like so:
+WordPress usernames and passwords are defined at the top of `conf/wp-setup.sh`, and MySQL usernames and passwords are defined in `docker-compose.yml`.
 
-    cd /var/www/wordpress
-    /home/vagrant/shared/bin/fixture
+WordPress itself, and the database, are stored in Docker volumes, so they persist between runs. If you want to start again from scratch, you can delete the volumes, and then `docker compose up` again:
+
+    docker compose down --volumes
+
+You can run [wp-cli](https://wp-cli.org/) commands via the `wpcli` service, eg:
+
+    docker compose run --rm wpcli wp plugin list
+
+There’s a fixtures script that sets up example menus, pages, etc, in WordPress. You can run it like so:
+
+    docker compose run --rm wpcli /fixmyblock/bin/fixture
 
 ## Editing the styles
 
-You can (re)build the CSS stylesheets by running this on the host machine:
+You can (re)build the CSS stylesheets by running this on your own machine (not inside Docker):
 
     bin/make-css
 

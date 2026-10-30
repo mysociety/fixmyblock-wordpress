@@ -1,8 +1,0 @@
-[Unit]
-Description=MailHog service
-
-[Service]
-ExecStart=/usr/local/bin/mailhog
-
-[Install]
-WantedBy=multi-user.target
