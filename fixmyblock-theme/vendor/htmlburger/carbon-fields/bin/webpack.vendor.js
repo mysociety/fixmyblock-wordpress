@@ -2,7 +2,7 @@
  * External dependencies.
  */
 const webpack = require( 'webpack' );
-const merge = require( 'webpack-merge' );
+const { merge } = require( 'webpack-merge' );
 
 /**
  * Internal dependencies.
@@ -27,6 +27,7 @@ module.exports = [
 			'react': 'React',
 			'react-dom': 'ReactDOM',
 			'jquery': 'jQuery',
+			'@wordpress/components': [ 'wp', 'components' ]
 		} )
 	} ),
 	merge( base, config, {

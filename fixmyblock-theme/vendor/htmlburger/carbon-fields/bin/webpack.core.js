@@ -2,7 +2,7 @@
  * External dependencies.
  */
 const webpack = require( 'webpack' );
-const merge = require( 'webpack-merge' );
+const { merge } = require( 'webpack-merge' );
 
 /**
  * Internal dependencies.
@@ -35,7 +35,8 @@ module.exports = [
 			path: paths.gutenbergBuildPath
 		},
 		externals: Object.assign( {}, wpPackages.externals, {
-			'lodash': [ 'lodash' ]
+			'lodash': [ 'lodash' ],
+			'@wordpress/components': [ 'wp', 'components' ]
 		} )
 	} ),
 	merge( base, config, {
@@ -43,7 +44,8 @@ module.exports = [
 			path: paths.classicBuildPath
 		},
 		externals: Object.assign( {}, wpPackages.proxyExternals, {
-			'lodash': [ 'cf', 'vendor', 'lodash' ]
+			'lodash': [ 'cf', 'vendor', 'lodash' ],
+			'@wordpress/components': [ 'cf', 'vendor', '@wordpress/components' ]
 		} ),
 		plugins: [
 			new webpack.ProvidePlugin( {

@@ -3,17 +3,20 @@
    ========================================================================== */
 
 .cf-association__cols {
-	.block-editor & {
+	.block-editor &,
+	.editor-styles-wrapper & {
 		border-top-width: 1px;
 		margin-top: 4px;
 	}
 
 	.edit-post-sidebar & {
 		border-color: $gb-dark-gray-150;
+		flex-direction: column;
 	}
 
 	.edit-post-sidebar &::before {
 		background-color: $gb-dark-gray-150;
+		display: none;
 	}
 }
 

@@ -30,6 +30,14 @@ add_theme_support( 'post-thumbnails' );
 add_theme_support( 'customize-selective-refresh-widgets' );
 
 
+// Use the classic widgets screen, since Carbon Fields widgets don't
+// display their fields in the block-based widget editor.
+// https://developer.wordpress.org/block-editor/how-to-guides/widgets/opting-out/
+add_action( 'after_setup_theme', function() {
+    remove_theme_support( 'widgets-block-editor' );
+} );
+
+
 // https://developer.wordpress.org/block-editor/developers/themes/theme-support/#wide-alignment
 add_theme_support( 'align-wide' );
 
