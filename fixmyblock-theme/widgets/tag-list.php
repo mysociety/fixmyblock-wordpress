@@ -1,8 +1,6 @@
 <?php
 
-use Carbon_Fields\Widget;
-
-class TagListWidget extends Widget {
+class TagListWidget extends FixMyBlockWidget {
     function __construct() {
         $this->setup(
             'tag_list_widget',

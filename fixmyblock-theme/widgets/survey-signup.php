@@ -1,8 +1,6 @@
 <?php
 
-use Carbon_Fields\Widget;
-
-class SurveySignupWidget extends Widget {
+class SurveySignupWidget extends FixMyBlockWidget {
     function __construct() {
         $this->setup(
             'survey_signup_widget',

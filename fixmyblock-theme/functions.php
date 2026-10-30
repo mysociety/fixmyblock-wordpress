@@ -36,6 +36,7 @@ require get_parent_theme_file_path( '/taxonomies/category.php' );
 require get_parent_theme_file_path( '/taxonomies/group-area.php' );
 require get_parent_theme_file_path( '/taxonomies/group-type.php' );
 
+require get_parent_theme_file_path( '/widgets/widget.php' );
 require get_parent_theme_file_path( '/widgets/tag-list.php' );
 require get_parent_theme_file_path( '/widgets/share-buttons.php' );
 require get_parent_theme_file_path( '/widgets/survey-signup.php' );

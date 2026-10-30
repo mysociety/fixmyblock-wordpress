@@ -1,8 +1,6 @@
 <?php
 
-use Carbon_Fields\Widget;
-
-class ShareButtonsWidget extends Widget {
+class ShareButtonsWidget extends FixMyBlockWidget {
     function __construct() {
         $this->setup(
             'share_buttons_widget',
